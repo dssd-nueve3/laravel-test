@@ -1,7 +1,10 @@
 <x-app-layout>
     <div class="max-w-6xl mx-auto shadow p-3 mt-4 bg-white rounded">
-        <a  title="Create a product" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded">
-            <i class="fas fa-plus-circle"></i> {{__('New')}}
+        <a href="{{route('product.create')}}" title="Create a product" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded">
+
+            <i class="fas fa-plus-circle">
+                {{__('New')}}
+            </i>
         </a>
 
         <div class="bg-white shadow-md rounded my-6">
