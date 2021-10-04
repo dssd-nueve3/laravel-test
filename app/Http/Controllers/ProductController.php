@@ -10,7 +10,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
@@ -78,12 +78,13 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
+
+        $product = Product::findOrFail($id);
         $product->delete();
-        
         return redirect()->route('product.index')->with('success', 'Product deleted successfully');
     }
 }
