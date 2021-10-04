@@ -1,12 +1,10 @@
 <x-app-layout>
     <div class="max-w-6xl mx-auto shadow p-3 mt-4 bg-white rounded">
-        <a href="{{route('product.create')}}" title="Create a product" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded">
-
-            <i class="fas fa-plus-circle">
-                {{__('New')}}
-            </i>
+        {{--CREATE NET ITEM--}}
+        <a href="/product/create" title="Create a product" class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 my-4 rounded">
+            <i class="fas fa-plus-circle"></i> {{__('New')}}
         </a>
-
+        {{-- TABLE ITEMS LIST--}}
         <div class="bg-white shadow-md rounded my-6">
             <table class="text-left w-full border-collapse">
                 <thead>
@@ -28,8 +26,8 @@
                     </th>
                 </tr>
                 </thead>
+                {{--SHOW ITEMS--}}
                 <tbody>
-
                 @foreach($products as $product)
                     <tr>
                         <td class="py-4 px-6 border-b border-grey-light">
@@ -44,8 +42,10 @@
                         <td class="py-4 px-6 border-b border-grey-light">
                             {{$product->brand->name}}
                         </td>
-
-                        <td><a class="bg-green-400 hover:bg-green-600 text-white p-2 rounded " href="/product/{{$product->id}}/edit"><i class="fas fa-edit"></i></a></td>
+                        {{--CRUD ITEMS--}}
+                        <td>
+                            <a class="bg-green-400 hover:bg-green-600 text-white p-2 rounded " href="/product/{{$product->id}}/edit"><i class="fas fa-edit"></i></a>
+                        </td>
                         <td>
                             <form action="{{route('product.destroy',$product->id)}}" method="POST">
                                 @csrf
@@ -63,11 +63,7 @@
         </div>
         {{ $products->links()}}
     </div>
-@push('scripts')
-    <!-- AQUI EST EL SCRIPT -->
-        <script>
-            let  salutation = 'hola';
-        </script>
+    @push('scripts')
     @endpush
 </x-app-layout>
 

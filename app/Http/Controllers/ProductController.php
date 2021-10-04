@@ -22,7 +22,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function create()
     {
@@ -32,18 +32,32 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:products|max:255|min:6',
+            'description' => 'required:min:6',
+            'price' => 'required|numeric'
+        ]);
+
+
+        $product = new Product();
+
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+
+        $product->save();
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -54,7 +68,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -65,8 +79,8 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -77,7 +91,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
