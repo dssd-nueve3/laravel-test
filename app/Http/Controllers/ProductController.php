@@ -44,7 +44,6 @@ class ProductController extends Controller
             'price' => 'required'
         ]);
 
-
         $product = new Product();
 
         $product->name = $request->name;
