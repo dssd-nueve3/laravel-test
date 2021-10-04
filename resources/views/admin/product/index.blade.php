@@ -1,8 +1,8 @@
 <x-app-layout>
     <div class="max-w-6xl mx-auto shadow p-3 mt-4 bg-white rounded">
-        <button type="button" title="Create a product" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded">
-            <i class="fas fa-plus-circle"></i>
-        </button>
+        <a  title="Create a product" class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded">
+            <i class="fas fa-plus-circle"></i> {{__('New')}}
+        </a>
 
         <div class="bg-white shadow-md rounded my-6">
             <table class="text-left w-full border-collapse">
@@ -49,7 +49,7 @@
                                 @method('DELETE')
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <button type="submit" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                                    <i class="fas fa-eye text-success  fa-lg"></i>
+                                    <i class="fas fa-trash text-success"></i>
                                 </button>
                             </form>
                         </td>
