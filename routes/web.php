@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +24,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::resource('/users',UserController::class)->middleware(['auth:sanctum', 'verified']);
+//Route::resource('/product/', \App\Http\Controllers\ProductController::class)->middleware(['auth:sanctum', 'verified']);
+Route::resource('/product/', \App\Http\Controllers\ProductController::class);
+
+
+
+//Route::resource('/users',UserController::class)->middleware(['auth:sanctum', 'verified']);
