@@ -37,10 +37,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required|unique:products|max:255|min:6',
-            'description' => 'required:min:6',
-            'price' => 'required|numeric'
+            'description' => 'required',
+            'price' => 'required'
         ]);
 
 
@@ -49,7 +50,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
-
+        $product->brand_id = $request->brand;
         $product->save();
 
     }

@@ -7,15 +7,16 @@ use Illuminate\View\Component;
 class TextArea extends Component
 {
 
-    public $textArea;
+    public $itemName;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($textArea)
+    public function __construct($itemName)
     {
-        $this->textArea = $textArea;
+
+        $this->itemName = $itemName;
     }
 
     /**
