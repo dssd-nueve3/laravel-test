@@ -52,6 +52,9 @@ class ProductController extends Controller
         $product->brand_id = $request->brand;
         $product->save();
 
+        return redirect()->route('product.index')->with('success', 'Product created successfully');
+
+
     }
 
     /**
@@ -73,7 +76,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        //get product info
+
+        $product = Product::find($id);
+        return view('admin.product.edit', compact('product'));
     }
 
     /**
@@ -85,7 +92,18 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $product = Product::find($id);
+
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->brand_id = $request->brand;
+        $product->save();
+
+        return redirect()->route('product.index')->with('success', 'Product updated successfully');
+
+
     }
 
     /**

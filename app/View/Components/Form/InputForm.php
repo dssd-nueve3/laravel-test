@@ -8,14 +8,16 @@ class InputForm extends Component
 {
 
     public $itemName;
+    public $itemValue;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($itemName)
+    public function __construct($itemName, $itemValue)
     {
         $this->itemName = $itemName;
+        $this->itemValue = $itemValue;
     }
 
     /**

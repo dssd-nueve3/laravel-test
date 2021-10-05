@@ -6,15 +6,15 @@
             @csrf
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="name" :value="'Name'"/>
-                <x-form.input-form id="name" class="block w-full" type="text" name="name" :itemName="'name'" required autocomplete="current-password" autofocus/>
+                <x-form.input-form id="name" class="block w-full" type="text" name="name" :itemName="'name'" :itemValue="''" required autocomplete="current-password" autofocus/>
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="description" :value="'Description'"/>
-                <x-form.text-area :itemName="'description'"/>
+                <x-form.text-area :itemName="'description'" :itemValue="''"/>
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="price" :value="'Price'"/>
-                <x-form.input-form id="price" class="block w-full" type="number" name="price" :itemName="'price'" required autocomplete="current-password" autofocus min="0"/>
+                <x-form.input-form id="price" class="block w-full" type="number" name="price" :itemName="'price'" :itemValue="''" required autocomplete="current-password" autofocus min="0" step="any"/>
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="brand" :value="'Brand'"/>
