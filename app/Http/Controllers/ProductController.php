@@ -95,17 +95,13 @@ class ProductController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
+        $product = Product::find($id);
 
         $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required',
-            'price' => 'required',
-            'brand_id' => 'required|not_in:0'
-        ]);
 
-        $product = Product::find($id);
+        ]);
 
         $product->name = $request->name;
         $product->description = $request->description;
@@ -114,7 +110,6 @@ class ProductController extends Controller
         $product->save();
 
         return redirect()->route('product.index')->with('success', 'Product updated successfully');
-
 
     }
 

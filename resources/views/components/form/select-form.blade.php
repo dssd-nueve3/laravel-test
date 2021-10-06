@@ -6,4 +6,7 @@
        <option value="{{$itemOption->id}}" @if($itemOption->id == $itemSaved->id) selected @endif>{{$itemOption->name}}</option>
     @endforeach
     </select>
+    @error($itemName)
+    <small class="text-red-600">{{ $message }}</small>
+    @enderror
 </div>

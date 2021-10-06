@@ -2,7 +2,7 @@
     <div class="max-w-6xl mx-auto shadow p-3 mt-4 bg-white rounded">
         {{-- {{dd($product)}} --}}
         <x-form.header :action="'Edit'" :model="'Product'"/>
-        <form action="{{route('product.update', $product->id)}}" method="POST">
+        <form action="{{route('product.update', $product)}}" method="POST">
             @csrf
             @method('PUT')
             <div class="form-item-container my-2 p-2">
