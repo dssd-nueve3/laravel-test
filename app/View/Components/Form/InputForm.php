@@ -9,15 +9,17 @@ class InputForm extends Component
 
     public $itemName;
     public $itemValue;
+    public $itemType;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($itemName, $itemValue)
+    public function __construct($itemName, $itemValue, $itemType)
     {
         $this->itemName = $itemName;
         $this->itemValue = $itemValue;
+        $this->itemType = $itemType;
     }
 
     /**
