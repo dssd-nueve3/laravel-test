@@ -34,7 +34,7 @@
                             {{$product->name}}
                         </td>
                         <td class="py-4 px-6 border-b border-grey-light">
-                            {{$product->description}}
+                            {!!  $product->description !!}
                         </td>
                         <td class="py-4 px-6 border-b border-grey-light">
                             {{'$' . $product->price}}

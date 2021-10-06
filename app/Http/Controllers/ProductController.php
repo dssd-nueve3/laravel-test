@@ -43,7 +43,8 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|unique:products|max:255|min:6',
             'description' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'brand_id' => 'required|not_in:0'
         ]);
 
         $product = new Product();
@@ -96,6 +97,13 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'name' => 'required|max:255',
+            'description' => 'required',
+            'price' => 'required',
+            'brand_id' => 'required|not_in:0'
+        ]);
 
         $product = Product::find($id);
 

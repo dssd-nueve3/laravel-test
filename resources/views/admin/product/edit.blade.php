@@ -7,19 +7,19 @@
             @method('PUT')
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="name" :value="'Name'"/>
-                <x-form.input-form :itemName="'name'" :itemValue="$product->name" id="name" class="block w-full" type="text" name="name" required autofocus/>
+                <x-form.input-form :itemName="'name'" :itemValue="$product->name" id="name" class="block w-full" :itemType="'text'" name="name" required autofocus/>
             </div>
             <div class="form-item-container my-2 p-2">
-                <x-form.label for="description" :value="'Description'"/>
-                <x-form.text-area :itemName="'description'" :itemValue="$product->description"/>
+                <x-form.label for="description-{{$product->id}}" :value="'Description'"/>
+                <x-form.text-area :itemId="'description-'.$product->id" :itemName="'description'" :itemValue="$product->description"/>
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="price" :value="'Price'"/>
-                <x-form.input-form id="price" class="block w-full" type="number" name="price" :itemName="'price'" :itemValue="$product->price" required autocomplete="current-password" autofocus min="0" step="any"/>
+                <x-form.input-form id="price" class="block w-full" type="number" name="price" :itemName="'price'" :itemValue="$product->price" :itemType="'text'" required autocomplete="current-password" autofocus min="0" step="any"/>
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="brand" :value="'Brand'"/>
-                <x-form.select-form :itemName="'brand'" :itemSaved="$brand" :collectionItem="$collectionItem" />
+                <x-form.select-form :itemName="'brand'" :itemSaved="$product->brand" :collectionItem="$collectionItem" />
             </div>
 
             <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
