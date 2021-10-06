@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -26,7 +27,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+        $collectionItem = Brand::all();
+        return view('admin.product.create', compact('collectionItem'));
     }
 
     /**
@@ -52,6 +54,9 @@ class ProductController extends Controller
         $product->brand_id = $request->brand;
         $product->save();
 
+        return redirect()->route('product.index')->with('success', 'Product created successfully');
+
+
     }
 
     /**
@@ -73,7 +78,13 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        //get product info
+        $product = Product::find($id);
+        $brand = Brand::find($product->brand_id);
+        $collectionItem = Brand::all();
+
+        return view('admin.product.edit', compact('product', 'brand', 'collectionItem'));
     }
 
     /**
@@ -85,7 +96,18 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $product = Product::find($id);
+
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->brand_id = $request->brand;
+        $product->save();
+
+        return redirect()->route('product.index')->with('success', 'Product updated successfully');
+
+
     }
 
     /**

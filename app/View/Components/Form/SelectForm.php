@@ -4,21 +4,25 @@ namespace App\View\Components\Form;
 
 use Illuminate\View\Component;
 
-class TextArea extends Component
+class SelectForm extends Component
 {
 
+    public $itemSaved;
+    public $collectionItem;
     public $itemName;
-    public $itemValue;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($itemName, $itemValue)
+    
+    public function __construct($itemName, $itemSaved, $collectionItem)
     {
-
         $this->itemName = $itemName;
-        $this->itemValue = $itemValue;
+        $this->itemSaved = $itemSaved;
+        $this->collectionItem = $collectionItem;
+
     }
 
     /**
@@ -28,6 +32,6 @@ class TextArea extends Component
      */
     public function render()
     {
-        return view('components.form.text-area');
+        return view('components.form.select-form');
     }
 }
