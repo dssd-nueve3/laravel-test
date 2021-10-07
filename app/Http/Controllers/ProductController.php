@@ -40,20 +40,30 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
+        dd($request);
+
+
+     /* $request->validate([
             'name' => 'required|unique:products|max:255|min:6',
             'description' => 'required',
             'price' => 'required',
-            'brand_id' => 'required|not_in:0'
-        ]);
+            'brand_id' => 'required|min:1'
+        ]);*/
 
+
+
+            
         $product = new Product();
 
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
         $product->brand_id = $request->brand;
-        $product->save();
+        $product->image = $request->image;
+        $saved = $product->save();
+
+        
+
 
         return redirect()->route('product.index')->with('success', 'Product created successfully');
 

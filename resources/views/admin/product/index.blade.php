@@ -16,6 +16,9 @@
                         {{__('Description')}}
                     </th>
                     <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+                        {{__('Image')}}
+                    </th>
+                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
                         {{__('Price')}}
                     </th>
                     <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
@@ -35,6 +38,9 @@
                         </td>
                         <td class="py-4 px-6 border-b border-grey-light">
                             {!!  $product->description !!}
+                        </td>
+                        <td class="py-4 px-6 border-b border-grey-light">
+                           <img src="/storage/images/{{$product->image}}" alt="{{$product->name}}">
                         </td>
                         <td class="py-4 px-6 border-b border-grey-light">
                             {{'$' . $product->price}}

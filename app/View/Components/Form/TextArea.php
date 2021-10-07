@@ -10,17 +10,19 @@ class TextArea extends Component
     public $itemName;
     public $itemValue;
     public $itemId;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($itemName, $itemValue,$itemId)
+    public function __construct($itemName, $itemValue, $itemId)
     {
 
         $this->itemName = $itemName;
         $this->itemValue = $itemValue;
         $this->itemId = $itemId;
+
     }
 
     /**
