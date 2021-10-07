@@ -74,7 +74,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('admin.user.edit', compact('user'));
+
     }
 
     /**
@@ -86,7 +89,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validation($request);
+
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+
+        $user->save();
+
+        return redirect()->route('user.index')->with('success', 'User updated successfully');
+
     }
 
     /**
@@ -99,7 +112,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect(route('user.index')->with('success', 'User deleted successfully'));
+        return redirect()->route('user.index')->with('success', 'User deleted successfully');
 
     }
 
@@ -109,7 +122,7 @@ class UserController extends Controller
         //TODO:
 
         $request->validate([
-            'name' => 'required|unique:users|max:255|min:6',
+            'name' => 'required|max:255|min:6',
             'email' => 'required|email:rfc,dns|unique:users',
             'password' => 'required|confirmed|min:8',
             'password_confirmation' => 'required',
