@@ -15,11 +15,11 @@
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="password" :value="'Password'"/>
-                <x-form.input-form :itemName="'Password'" :itemValue="''" id="password" class="block w-full" :itemType="'password'" name="password" required autofocus/>
+                <x-form.input-form :itemName="'password'" :itemValue="''" id="password" class="block w-full" :itemType="'password'" name="password" required autofocus/>
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="password_confirmation" :value="'Password Confirmation'"/>
-                <x-form.input-form :itemName="'Password_confirmation'" :itemValue="''" id="password_confirmation" class="block w-full" :itemType="'password'" name="password_confirmation" required autofocus/>
+                <x-form.input-form :itemName="'password_confirmation'" :itemValue="''" id="password_confirmation" class="block w-full" :itemType="'password'" name="password_confirmation" required autofocus/>
             </div>
             <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                 <i class="fas fa-paper-plane"></i> {{__('Update')}}
