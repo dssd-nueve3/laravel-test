@@ -26,10 +26,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::resource('product', \App\Http\Controllers\ProductController::class)->middleware(['auth:sanctum', 'verified']);
 Route::resource('user', \App\Http\Controllers\UserController::class)->middleware(['auth:sanctum', 'verified']);
+Route::resource('brand', \App\Http\Controllers\BrandController::class)->middleware(['auth:sanctum', 'verified']);
 
 //Route::post('/product/{id}', \App\Http\Controllers\ProductController::class)->name('product.destroy');
 //Route::resource('/product/', \App\Http\Controllers\ProductController::class);
-
-
-
 //Route::resource('/users',UserController::class)->middleware(['auth:sanctum', 'verified']);

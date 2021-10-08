@@ -40,7 +40,7 @@
                             {!!  $product->description !!}
                         </td>
                         <td class="py-4 px-6 border-b border-grey-light">
-                           <img src="/storage/images/{{$product->image}}" alt="{{$product->name}}">
+                           <img src="/storage/images/{{$product->image}}" alt="{{$product->name}}" width="80">
                         </td>
                         <td class="py-4 px-6 border-b border-grey-light">
                             {{'$' . $product->price}}
