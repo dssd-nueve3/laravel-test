@@ -19,7 +19,7 @@
                         {{ __('Products') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="/brand" :active="request()->routeIs('brand.index')">
-                        {{ __('Brand') }}
+                        {{ __('Brands') }}
                     </x-jet-nav-link>
                 <x-jet-nav-link href="/user" :active="request()->routeIs('user.index')">
                         {{__('Users')}}

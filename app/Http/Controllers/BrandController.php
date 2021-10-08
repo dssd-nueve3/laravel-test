@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -27,7 +28,8 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.brand.create');
+
     }
 
     /**
@@ -38,7 +40,17 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validation($request);
+
+        $brand = new Brand();
+
+        $brand->name = $request->name;
+        $brand->description = $request->description;
+
+        $brand->save();
+
+        return redirect()->route('brand.index')->with('success', 'Brand created successfully');
+
     }
 
     /**
@@ -58,9 +70,10 @@ class BrandController extends Controller
      * @param \App\Models\Brand $brand
      * @return \Illuminate\Http\Response
      */
-    public function edit(Brand $brand)
+    public function edit($id)
     {
-        //
+        $brand = Brand::find($id);
+        return view('admin.brand.edit', compact('brand'));
     }
 
     /**
@@ -70,9 +83,19 @@ class BrandController extends Controller
      * @param \App\Models\Brand $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Brand $brand)
+    public function update(Request $request, $id)
     {
-        //
+
+        $this->validation($request);
+
+        $brand = Brand::find($id);
+        $brand->name = $request->name;
+        $brand->description = $request->description;
+
+        $brand->save();
+
+        return redirect()->route('brand.index')->with('success', 'Brand updated successfully');
+
     }
 
     /**
@@ -81,8 +104,23 @@ class BrandController extends Controller
      * @param \App\Models\Brand $brand
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Brand $brand)
+    public function destroy($id)
     {
-        //
+        $brand = Brand::findOrFail($id);
+        $brand->delete();
+        return redirect()->route('brand.index')->with('success', 'Brand deleted successfully');
+
+    }
+
+    public function validation($request){
+
+        //TODO: checar en laravel el email de validacion y agregar que valide el punto al meno
+        //TODO:
+
+        $request->validate([
+            'name' => 'required|max:255|min:6',
+            'description' => 'required',
+        ]);
+
     }
 }
