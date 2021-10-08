@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
+@stack('styles')
 @livewireStyles
 
 <!-- Scripts -->
@@ -26,8 +26,9 @@
 <x-jet-banner/>
 
 <div class="min-h-screen bg-gray-100">
-@livewire('navigation-menu')
-@if(Session::has('success')) <div class="bg-green-500 p-4 my-4 max-w-3xl rounded text-white mx-auto animate__animated animate__fadeOut animate__delay-2s">{{Session::get('success')}}</div>@endif
+    @livewire('navigation-menu')
+    @if(Session::has('success'))
+        <div class="bg-green-500 p-4 my-4 max-w-3xl rounded text-white mx-auto animate__animated animate__fadeOut animate__delay-2s">{{Session::get('success')}}</div>@endif
 <!-- Page Heading -->
     @if (isset($header))
         <header class="bg-white shadow">

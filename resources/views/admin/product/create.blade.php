@@ -12,10 +12,9 @@
                 <x-form.label for="description" :value="'Description'"/>
                 <x-form.text-area :itemId="'description'" :itemName="'description'" :itemValue="''"/>
             </div>
-            <div>
-                <x-form.label for="image_name" :value="'Image'"/>
-                <x-form.input-form :itemType="'file'" :itemValue="''" :itemName="'image'" name="image_name" id="image_name" class="filepond block" multiple data-allow-reorder="true" data-max-file-size="3MB" data-max-files="3" />
-                
+            <div class="form-item-container my-2 p-2">
+                <x-form.label for="otro" :value="'Otro'"/>
+                <livewire:forms.upload-file  wire:model="images" :model="'Brand'" />
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="price" :value="'Price'"/>
@@ -33,42 +32,4 @@
         </form>
 
     </div>
-@push('scripts')
-    <!-- AQUI EST EL SCRIPT LLEGUE -->
-        <script src="{{asset('vendor/filepond/dist/filepond.js')}}"></script>
-        <script src="{{asset('vendor/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js')}}"></script>
-        <script src="{{asset('vendor/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js')}}"></script>
-        <script src="{{asset('vendor/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js')}}"></script>
-        <script src="{{asset('vendor/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js')}}"></script>
-
-            <script>
-                
-                FilePond.registerPlugin(
-                FilePondPluginImagePreview,
-                FilePondPluginImageExifOrientation,
-                FilePondPluginFileValidateSize,
-                FilePondPluginImageEdit
-                );
-
-                // Select the file input and use 
-                // create() to turn it into a pond
-                FilePond.create(
-                document.querySelector('#image_name')
-                );
-
-                const pondBox = document.querySelector('.filepond--root');
-                pondBox.addEventListener('FilePond:addfile', e => {
-                        console.log('file added event', e.detail);
-                        var fileName = e.detail.pond.getFile().filename;
-
-                    document.querySelector('#image').value = fileName;
-
-                    console.log(document.querySelector('#image_name'));
-
-                    });
-
-
-
-        </script>
-    @endpush
 </x-app-layout>
