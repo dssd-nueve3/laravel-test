@@ -40,8 +40,10 @@
                             {!!  $product->description !!}
                         </td>
                         <td class="py-4 px-6 border-b border-grey-light">
-                            {{$mediaItem = $product->getMedia()->where('model_id', $product->id)->first()}}
-                           <img src="{{!! $mediaItem !!}}" alt="" width="80">
+                            @foreach($product->getMedia('product_image') as $image)
+                                  <img src=" {{$image->getUrl()}}" alt="" width="80">
+                            @endforeach
+
                         </td>
                         <td class="py-4 px-6 border-b border-grey-light">
                             {{'$' . $product->price}}

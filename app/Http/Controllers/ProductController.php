@@ -54,7 +54,7 @@ class ProductController extends Controller
 
 
 
-            
+
         $product = new Product();
 
         $product->name = $request->name;
@@ -63,11 +63,11 @@ class ProductController extends Controller
         $product->brand_id = $request->brand;
         $product->image = $request->image;
 
-        $product->addMedia($request->image)->toMediaCollection();
+        $product->addMedia($request->image)->toMediaCollection('product_image');
 
-        $saved = $product->save();
+        $product->save();
 
-        
+
 
 
         return redirect()->route('product.index')->with('success', 'Product created successfully');

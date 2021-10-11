@@ -1,12 +1,8 @@
-@livewireStyles
 <div>
 
     <input type="file" name="image"/>
 
 </div>
-
-@livewireScripts
-
 @push('styles')
     @once
         <link rel="stylesheet" href="{{asset('/vendor/filepond/dist/filepond.css')}}">
@@ -16,7 +12,7 @@
 
 @push('scripts')
     @once
-        <script src="{{asset('vendor/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js')}}"></script>
+        {{--<script src="{{asset('vendor/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js')}}"></script>
         <script src="{{asset('vendor/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js')}}"></script>
         <script src="{{asset('vendor/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js')}}"></script>
         <script src="{{asset('vendor/filepond/dist/filepond.js')}}"></script>
@@ -24,6 +20,6 @@
             FilePond.registerPlugin(FilePondPluginFileValidateType);
             FilePond.registerPlugin(FilePondPluginFileValidateSize);
             FilePond.registerPlugin(FilePondPluginImagePreview);
-        </script>
+        </script>--}}
     @endonce
 @endpush

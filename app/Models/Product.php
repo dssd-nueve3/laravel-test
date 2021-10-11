@@ -22,4 +22,11 @@ class Product extends Model implements HasMedia
         return $this->belongsTo(Brand::class);
     }
 
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('product_image');
+
+
+
+}
 }
