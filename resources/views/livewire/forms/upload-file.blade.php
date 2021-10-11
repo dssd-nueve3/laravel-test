@@ -1,8 +1,11 @@
+@livewireStyles
 <div>
 
-    <input type="file" />
+    <input type="file" name="image"/>
 
 </div>
+
+@livewireScripts
 
 @push('styles')
     @once

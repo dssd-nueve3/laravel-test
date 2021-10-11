@@ -12,6 +12,9 @@ class UploadFile extends Component
 
     public function mount($model){
 
+        $this->model ='App\Models\\' . $model;
+
+
     }
 
     public function render()

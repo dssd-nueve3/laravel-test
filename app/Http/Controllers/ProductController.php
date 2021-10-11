@@ -27,6 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+
         $collectionItem = Brand::all();
         return view('admin.product.create', compact('collectionItem'));
     }
@@ -40,7 +41,8 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        dd($request);
+        //dd($request->file());
+        //dd($request);
 
 
      /* $request->validate([
@@ -60,6 +62,9 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->brand_id = $request->brand;
         $product->image = $request->image;
+
+        $product->addMedia($request->image)->toMediaCollection();
+
         $saved = $product->save();
 
         

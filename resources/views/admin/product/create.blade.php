@@ -2,7 +2,7 @@
     <div class="max-w-6xl mx-auto shadow p-3 mt-4 bg-white rounded">
         {{-- {{dd($collectionItem)}} --}}
         <x-form.header :action="'Create'" :model="'Product'"/>
-        <form action="{{route('product.store')}}" method="POST">
+        <form enctype="multipart/form-data" action="{{route('product.store')}}" method="POST">
             @csrf
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="name" :value="'Name'"/>
@@ -14,7 +14,8 @@
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="otro" :value="'Otro'"/>
-                <livewire:forms.upload-file  wire:model="images" :model="'Brand'" />
+                <livewire:forms.upload-file name="image" wire:model="Product" :model="'Product'" />
+                {{-- <input type="file" name="image"> --}}
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="price" :value="'Price'"/>
