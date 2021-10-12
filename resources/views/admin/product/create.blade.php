@@ -6,29 +6,29 @@
         <form enctype="multipart/form-data" action="{{route('product.store')}}" method="POST">
             @csrf
             <div class="form-item-container my-2 p-2">
-                <x-form.label for="name" :value="'Name'"/>
+                <livewire:forms.label for="name" :value="'Name'"/>
                 <livewire:forms.input-form id="name" :itemName="'name'" :itemValue="''" :itemType="'text'" required autocomplete="current-password" autofocus :bladeAttributes="[
                     'class' => 'block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm my-2',
                 ]" />
             </div>
             <div class="form-item-container my-2 p-2">
-                <x-form.label for="description" :value="'Description'"/>
+                <livewire:forms.label for="description" :value="'Description'"/>
                 <livewire:forms.text-area :itemId="'description'" :itemName="'description'" :itemValue="''"/>
             </div>
             <div class="form-item-container my-2 p-2">
-                <x-form.label for="otro" :value="'Otro'"/>
+                <livewire:forms.label for="otro" :value="'Otro'"/>
                 <livewire:forms.upload-file name="image" wire:model="Product" :model="'Product'" />
             </div>
             <div class="form-item-container my-2 p-2">
-                <x-form.label for="price" :value="'Price'"/>
+                <livewire:forms.label for="price" :value="'Price'"/>
                 <livewire:forms.input-form id="'price'" :itemName="'price'" :itemValue="''" :itemType="'number'" required autocomplete="current-password" autofocus :bladeAttributes="[
                     'class' => 'block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm my-2',
                     'min' => '0',
-                    'step' => 'any',
+                    'step' => '0.1',
                     ]" />
             </div>
             <div class="form-item-container my-2 p-2">
-                <x-form.label for="brand" :value="'Brand'"/>
+                <livewire:forms.label for="brand" :value="'Brand'"/>
                 <livewire:forms.select-form :itemName="'brand'" :itemSaved="''" :collectionItem="$collectionItem"/>
             </div>
 
