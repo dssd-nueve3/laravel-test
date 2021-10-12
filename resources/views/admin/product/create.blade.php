@@ -29,8 +29,7 @@
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="brand" :value="'Brand'"/>
-                {{-- {{dd($collectionItem)}} --}}
-                <x-form.select-form :itemName="'brand'" :itemSaved="''" :collectionItem="$collectionItem"/>
+                <livewire:forms.select-form :itemName="'brand'" :itemSaved="''" :collectionItem="$collectionItem"/>
             </div>
 
             <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
