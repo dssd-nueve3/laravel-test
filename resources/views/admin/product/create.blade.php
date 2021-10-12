@@ -7,9 +7,9 @@
             @csrf
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="name" :value="'Name'"/>
-                {{-- <x-form.input-form id="name" class="block w-full" :itemName="'name'" :itemValue="''" :itemType="'text'" required autocomplete="current-password" autofocus/> --}}
-                <livewire:forms.input-form id="name" class="block w-full" :itemName="'name'" :itemValue="''" :itemType="'text'" required autocomplete="current-password" autofocus/>
-
+                <livewire:forms.input-form id="name" :itemName="'name'" :itemValue="''" :itemType="'text'" required autocomplete="current-password" autofocus :bladeAttributes="[
+                    'class' => 'block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm my-2',
+                ]" />
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="description" :value="'Description'"/>
@@ -18,11 +18,14 @@
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="otro" :value="'Otro'"/>
                 <livewire:forms.upload-file name="image" wire:model="Product" :model="'Product'" />
-                {{-- <input type="file" name="image"> --}}
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="price" :value="'Price'"/>
-                <x-form.input-form id="'price'" class="block w-full" name="price" :itemName="'price'" :itemValue="''" :itemType="'number'" required autocomplete="current-password" autofocus min="0" step="any"/>
+                <livewire:forms.input-form id="'price'" :itemName="'price'" :itemValue="''" :itemType="'number'" required autocomplete="current-password" autofocus :bladeAttributes="[
+                    'class' => 'block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm my-2',
+                    'min' => '0',
+                    'step' => 'any',
+                    ]" />
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="brand" :value="'Brand'"/>
