@@ -13,7 +13,7 @@
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="description" :value="'Description'"/>
-                <x-form.text-area :itemId="'description'" :itemName="'description'" :itemValue="''"/>
+                <livewire:forms.text-area :itemId="'description'" :itemName="'description'" :itemValue="''"/>
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="otro" :value="'Otro'"/>
