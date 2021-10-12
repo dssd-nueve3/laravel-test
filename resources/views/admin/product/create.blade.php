@@ -1,7 +1,8 @@
 <x-app-layout>
     <div class="max-w-6xl mx-auto shadow p-3 mt-4 bg-white rounded">
         {{-- {{dd($collectionItem)}} --}}
-        <x-form.header :action="'Create'" :model="'Product'"/>
+        {{-- <x-form.header :action="'Create'" :model="'Product'"/> --}}
+        <livewire:forms.header :action="'Create'" :model="'Product'"/>
         <form enctype="multipart/form-data" action="{{route('product.store')}}" method="POST">
             @csrf
             <div class="form-item-container my-2 p-2">
