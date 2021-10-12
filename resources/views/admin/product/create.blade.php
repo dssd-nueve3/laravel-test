@@ -7,7 +7,9 @@
             @csrf
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="name" :value="'Name'"/>
-                <x-form.input-form id="name" class="block w-full" type="text" name="name" :itemName="'name'" :itemValue="''" :itemType="'text'" required autocomplete="current-password" autofocus/>
+                {{-- <x-form.input-form id="name" class="block w-full" :itemName="'name'" :itemValue="''" :itemType="'text'" required autocomplete="current-password" autofocus/> --}}
+                <livewire:forms.input-form id="name" class="block w-full" :itemName="'name'" :itemValue="''" :itemType="'text'" required autocomplete="current-password" autofocus/>
+
             </div>
             <div class="form-item-container my-2 p-2">
                 <x-form.label for="description" :value="'Description'"/>
