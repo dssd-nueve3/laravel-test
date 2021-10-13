@@ -7,9 +7,9 @@
             @csrf
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="name" :value="'Name'"/>
-                <livewire:forms.input-form id="name" :itemName="'name'" :itemValue="''" :itemType="'text'" required autocomplete="current-password" autofocus :bladeAttributes="[
-                    'class' => 'block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm my-2',
-                ]" />
+                <livewire:forms.input-form id="name" :itemName="'name'" :itemValue="''" :itemType="'text'"  autocomplete="current-password" autofocus :bladeAttributes="[
+                    'required' => 'required'
+                ]"/>
             </div>
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="description" :value="'Description'"/>
@@ -22,7 +22,6 @@
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="price" :value="'Price'"/>
                 <livewire:forms.input-form id="'price'" :itemName="'price'" :itemValue="''" :itemType="'number'" required autocomplete="current-password" autofocus :bladeAttributes="[
-                    'class' => 'block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm my-2',
                     'min' => '0',
                     'step' => '0.1',
                     ]" />
