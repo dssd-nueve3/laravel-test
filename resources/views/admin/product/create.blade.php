@@ -7,9 +7,7 @@
             @csrf
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="name" :value="'Name'"/>
-                <livewire:forms.input-form id="name" :itemName="'name'" :itemValue="''" :itemType="'text'"  autocomplete="current-password" autofocus :bladeAttributes="[
-                    'required' => 'required'
-                ]"/>
+                <livewire:forms.input-form id="name" wire:model="input" :itemName="'name'" :itemValue="''" :itemType="'text'" required autocomplete="current-password" autofocus :bladeAttributes="[]" />
             </div>
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="description" :value="'Description'"/>
@@ -21,10 +19,7 @@
             </div>
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="price" :value="'Price'"/>
-                <livewire:forms.input-form id="'price'" :itemName="'price'" :itemValue="''" :itemType="'number'" required autocomplete="current-password" autofocus :bladeAttributes="[
-                    'min' => '0',
-                    'step' => '0.1',
-                    ]" />
+                <livewire:forms.input-form id="'price'" :itemName="'price'" :itemValue="''" :itemType="'number'" required autocomplete="current-password" autofocus :bladeAttributes="['min' => '0','step' => '0.1',]" />
             </div>
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="brand" :value="'Brand'"/>
