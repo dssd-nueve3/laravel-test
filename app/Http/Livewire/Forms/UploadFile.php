@@ -9,10 +9,12 @@ class UploadFile extends Component
 {
 
     public $model;
+    public $itemName;
 
-    public function mount($model){
+    public function mount($model, $itemName){
 
         $this->model ='App\Models\\' . $model;
+        $this->itemName = $itemName;
 
 
     }
