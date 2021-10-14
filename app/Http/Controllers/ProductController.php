@@ -45,12 +45,12 @@ class ProductController extends Controller
         //dd($request);
 
 
-     /* $request->validate([
+      $request->validate([
             'name' => 'required|unique:products|max:255|min:6',
             'description' => 'required',
             'price' => 'required',
-            'brand_id' => 'required|min:1'
-        ]);*/
+            'image' => 'mimes:png,jpeg,gif'
+        ]);
 
 
 
@@ -66,9 +66,6 @@ class ProductController extends Controller
         $product->addMedia($request->image)->toMediaCollection('product_image');
 
         $product->save();
-
-
-
 
         return redirect()->route('product.index')->with('success', 'Product created successfully');
 

@@ -1,7 +1,9 @@
 <div>
 
-    <input type="file" name="image"/>
-
+    <input type="file" name="{{$itemName}}"/>
+    @error($itemName)
+    <small class="text-red-600">{{ $message }}</small>
+    @enderror
 </div>
 @push('styles')
     @once

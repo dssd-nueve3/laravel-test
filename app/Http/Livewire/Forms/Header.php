@@ -9,11 +9,13 @@ class Header extends Component
 
     public $action;
     public $model;
+    public $type;
 
-    public function mount($action, $model){
+    public function mount($action, $model, $type){
 
         $this->action = $action;
         $this->model = $model;
+        $this->type = $type;
 
     }
 
