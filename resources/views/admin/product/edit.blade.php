@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="max-w-6xl mx-auto shadow p-3 mt-4 bg-white rounded">
         {{-- {{dd($product)}} --}}
-        <livewire:forms.header :action="'Edit'" :model="'Product'"/>
+        <livewire:forms.header :action="'Edit'" :model="'Product'" :type="'h2'"/>
         <form action="{{route('product.update', $product)}}" method="POST">
             @csrf
             @method('PUT')
@@ -16,11 +16,15 @@
                 <livewire:forms.text-area :itemId="'description-'.$product->id" :itemName="'description'" :itemValue="$product->description"/>
             </div>
             <div class="form-item-container my-2 p-2">
+                <livewire:forms.label for="image-{{$product->id}}" :value="'Image'"/>
+                <livewire:forms.upload-file :itemSaved="$product" :itemName="'image'" wire:model="Product" :model="'Product'"/>
+            </div>
+            <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="price" :value="'Price'"/>
                 <livewire:forms.input-form id="price" name="price" :itemName="'price'" :itemValue="$product->price" :itemType="'number'" required autocomplete="current-password" autofocus :bladeAttributes="[
                     'class' => 'block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm my-2',
                     'min' => '0',
-                    'step' => '0.1'    
+                    'step' => '0.01'    
                     ]" />
             </div>
             <div class="form-item-container my-2 p-2">
