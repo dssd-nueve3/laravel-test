@@ -1,6 +1,6 @@
 <div>
-
-    <input type="file" name="{{$itemName}}"/>
+    {{-- {{dd($itemSaved)}} --}}
+    <input type="file" name="{{$itemName}}" href="{{$itemSaved ? $itemSaved->image : ''}}"/>
     @error($itemName)
     <small class="text-red-600">{{ $message }}</small>
     @enderror
@@ -14,14 +14,22 @@
 
 @push('scripts')
     @once
-        {{--<script src="{{asset('vendor/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js')}}"></script>
+        <script src="{{asset('vendor/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js')}}"></script>
         <script src="{{asset('vendor/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js')}}"></script>
         <script src="{{asset('vendor/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js')}}"></script>
         <script src="{{asset('vendor/filepond/dist/filepond.js')}}"></script>
         <script>
+
             FilePond.registerPlugin(FilePondPluginFileValidateType);
             FilePond.registerPlugin(FilePondPluginFileValidateSize);
             FilePond.registerPlugin(FilePondPluginImagePreview);
-        </script>--}}
+
+            const input = document.querySelector('input[name="{{$itemName}}"]')
+ 
+            FilePond.create(input, {
+                storeAsFile: true,   
+            });
+
+        </script>
     @endonce
 @endpush

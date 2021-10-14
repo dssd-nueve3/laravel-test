@@ -49,7 +49,7 @@ class ProductController extends Controller
             'name' => 'required|unique:products|max:255|min:6',
             'description' => 'required',
             'price' => 'required',
-            'image' => 'mimes:png,jpeg,gif'
+            'image' => 'required|image',
         ]);
 
 
@@ -64,7 +64,7 @@ class ProductController extends Controller
         $product->image = $request->image;
 
         $product->addMedia($request->image)->toMediaCollection('product_image');
-
+        //$product->addMedia($request->image->getRealPath())->toMediaCollection('product_image');
         $product->save();
 
         return redirect()->route('product.index')->with('success', 'Product created successfully');

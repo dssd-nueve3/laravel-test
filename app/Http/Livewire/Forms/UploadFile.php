@@ -3,18 +3,24 @@
 namespace App\Http\Livewire\Forms;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 
 class UploadFile extends Component
 {
 
+    use WithFileUploads;
+
     public $model;
     public $itemName;
+    public $itemSaved;
 
-    public function mount($model, $itemName){
+    public function mount($model, $itemName, $itemSaved){
 
-        $this->model ='App\Models\\' . $model;
         $this->itemName = $itemName;
+        $this->itemSaved = $itemSaved;
+
+        $this->model ='App\Models\\' . $model . "::create([])";
 
 
     }
@@ -23,4 +29,5 @@ class UploadFile extends Component
     {
         return view('livewire.forms.upload-file');
     }
+
 }
