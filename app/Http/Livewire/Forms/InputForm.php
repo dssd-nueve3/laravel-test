@@ -6,7 +6,6 @@ use Livewire\Component;
 
 class InputForm extends Component
 {
-
     public $itemName;
     public $itemValue;
     public $itemType;
@@ -14,12 +13,10 @@ class InputForm extends Component
     public $attributes;
 
     public function mount($itemName, $itemValue, $itemType, $bladeAttributes){
-
         $this->itemName = $itemName;
         $this->itemValue = $itemValue;
         $this->itemType = $itemType;
         $this->mapAttributes($bladeAttributes);
-
     }
 
     public function mapAttributes($bladeAttributes){
