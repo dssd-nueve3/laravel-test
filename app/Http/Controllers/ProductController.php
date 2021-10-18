@@ -36,14 +36,10 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-
-        //dd($request->file());
-        //dd($request);
-
 
       $request->validate([
             'name' => 'required|unique:products|max:255|min:6',
@@ -52,9 +48,6 @@ class ProductController extends Controller
             'image' => 'required|image',
         ]);
 
-
-
-
         $product = new Product();
 
         $product->name = $request->name;
@@ -62,9 +55,7 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->brand_id = $request->brand;
         $product->image = $request->image;
-
         $product->addMedia($request->image)->toMediaCollection('product_image');
-        //$product->addMedia($request->image->getRealPath())->toMediaCollection('product_image');
         $product->save();
 
         return redirect()->route('product.index')->with('success', 'Product created successfully');

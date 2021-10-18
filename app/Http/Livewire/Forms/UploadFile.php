@@ -13,15 +13,26 @@ class UploadFile extends Component
 
     public $model;
     public $itemName;
-    public $itemSaved;
+    public $item;
+    public $fileUrl;
+    public $fileName;
 
-    public function mount($model, $itemName, $itemSaved){
 
+
+    public function mount($model, $itemName)
+    {
         $this->itemName = $itemName;
-        $this->itemSaved = $itemSaved;
 
-        $this->model ='App\Models\\' . $model . "::create([])";
+        if ($model->getMedia('product_image')) {
+            $files = $model->getMedia('product_image');
+            foreach($files as $file){
 
+                $this->fileUrl = $file->getUrl();
+                $this->fileName = $file->file_name;
+
+            }
+
+        }
 
     }
 

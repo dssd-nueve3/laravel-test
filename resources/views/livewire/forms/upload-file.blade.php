@@ -1,21 +1,11 @@
 <div>
-
-    {{$imageSaved = ''}}
-    {{$fileOptions = ''}}
-
-    @if($itemSaved)
-
-        @foreach($itemSaved->getMedia('product_image') as $image)
-            {{$imageSaved = $image->getUrl()}}
-        @endforeach
-    @endif
-
-    <img src= "{{ $image->getUrl()}}" alt="">
-    <input type="file" name="{{$itemName}}"/>
+    <input id="{{$itemName}}" type="file" name="{{$itemName}}" />
+    {{$itemName}}
     @error($itemName)
     <small class="text-red-600">{{ $message }}</small>
     @enderror
 </div>
+
 @push('styles')
     @once
         <link rel="stylesheet" href="{{asset('/vendor/filepond/dist/filepond.css')}}">
@@ -31,35 +21,26 @@
         <script src="{{asset('vendor/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js')}}">
         </script>
         <script src="{{asset('vendor/filepond/dist/filepond.js')}}"></script>
+
         <script>
+
+            let files = 'esto: {{$fileName.' '.$fileUrl}}';
+
+
+            console.log(files)
             FilePond.registerPlugin(FilePondPluginFileValidateType);
             FilePond.registerPlugin(FilePondPluginFileValidateSize);
             FilePond.registerPlugin(FilePondPluginImagePreview);
 
             const input = document.querySelector('input[name="{{$itemName}}"]')
 
+            FilePond.create(input, {
+                storeAsFile: true,
+                allowMultiple: false,
+            });
 
 
-            let imageSaved = '{{$imageSaved}}';
 
-            console.log(imageSaved)
-            if (imageSaved) {
-
-                FilePond.create(input, {
-                    storeAsFile: true,
-                    files: [{
-                        source: '{{ $imageSaved }}',
-                        options: {
-                            type: 'local'
-                        }
-                    }]
-                });
-            } else {
-
-                FilePond.create(input, {
-                    storeAsFile: true
-                });
-            }
 
         </script>
     @endonce
