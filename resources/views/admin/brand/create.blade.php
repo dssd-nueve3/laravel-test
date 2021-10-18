@@ -1,6 +1,6 @@
 <x-app-layout>
 <div class="max-w-6xl mx-auto shadow p-3 mt-4 bg-white rounded">
-    <livewire:forms.header :action="'Create'" :model="'Brand'"/>
+    <livewire:forms.header :action="'Create'" :model="'Brand'" :type="'h2'"/>
     <form action="{{route('brand.store')}}" method="post">
         @csrf
         <div class="form-item-container my-2 p-2">

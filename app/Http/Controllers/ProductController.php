@@ -112,13 +112,16 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         $request->validate([
-
+            'image' => 'required',
         ]);
+
 
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
         $product->brand_id = $request->brand;
+        $product->image = $request->image;
+        $product->addMedia($request->image)->toMediaCollection('product_image');
         $product->save();
 
         return redirect()->route('product.index')->with('success', 'Product updated successfully');

@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="max-w-6xl mx-auto shadow p-3 mt-4 bg-white rounded">
         {{-- {{dd($user)}} --}}
-        <livewire:forms.header :action="'Edit'" :model="'User'"/>
+        <livewire:forms.header :action="'Edit'" :model="'User'" :type="'h2'"/>
         <form action="{{route('user.update', $user)}}" method="POST">
             @csrf
             @method('PUT')

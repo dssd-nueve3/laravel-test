@@ -2,7 +2,7 @@
     <div class="max-w-6xl mx-auto shadow p-3 mt-4 bg-white rounded">
         {{-- {{dd($product)}} --}}
         <livewire:forms.header :action="'Edit'" :model="'Product'" :type="'h2'"/>
-        <form action="{{route('product.update', $product)}}" method="POST">
+        <form enctype="multipart/form-data" action="{{route('product.update', $product)}}" method="POST">
             @csrf
             @method('PUT')
             <div class="form-item-container my-2 p-2">
