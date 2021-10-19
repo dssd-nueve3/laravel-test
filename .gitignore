@@ -16,3 +16,5 @@ yarn-error.log
 /.dstore
 # Project exclude paths
 #/storage/
+/nbproject/private/
+/storage/images/

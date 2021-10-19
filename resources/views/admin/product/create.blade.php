@@ -13,7 +13,7 @@
             </div>
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="image" :value="'Image'"/>
-                <livewire:forms.upload-file :itemSaved="''" :itemName="'image'" wire:model="Product" :model="'Product'" required/>
+                <livewire:forms.upload-file :itemName="'image'" :model="'Product'"/>
             </div>
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="price" :value="'Price'"/>

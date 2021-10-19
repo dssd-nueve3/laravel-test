@@ -23,16 +23,21 @@ class UploadFile extends Component
     {
         $this->itemName = $itemName;
 
-        if ($model->getMedia('product_image')) {
-            $files = $model->getMedia('product_image');
-            foreach($files as $file){
+        if(gettype($model) === 'object'){
 
-                $this->fileUrl = $file->getUrl();
-                $this->fileName = $file->file_name;
-
+            if ($model->getMedia('product_image')) {
+                $files = $model->getMedia('product_image');
+                foreach($files as $file){
+    
+                    $this->fileUrl = $file->getUrl();
+                    $this->fileName = $file->file_name;
+    
+                }
+    
             }
-
         }
+
+
 
     }
 

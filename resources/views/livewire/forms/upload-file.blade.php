@@ -10,6 +10,7 @@
     @once
         <link rel="stylesheet" href="{{asset('/vendor/filepond/dist/filepond.css')}}">
         <link rel="stylesheet" href="{{asset('/vendor/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css')}}">
+        <link rel="stylesheet" href="{{asset('/vendor/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css')}}">
     @endonce
 @endpush
 
@@ -18,8 +19,8 @@
         <script src="{{asset('vendor/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js')}}">
         </script>
         <script src="{{asset('vendor/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js')}}"></script>
-        <script src="{{asset('vendor/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js')}}">
-        </script>
+        <script src="{{asset('vendor/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js')}}"></script>
+        <script src="{{asset('vendor/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js')}}"></script>
         <script src="{{asset('vendor/filepond/dist/filepond.js')}}"></script>
 
         <script>
@@ -31,8 +32,43 @@
             FilePond.registerPlugin(FilePondPluginFileValidateType);
             FilePond.registerPlugin(FilePondPluginFileValidateSize);
             FilePond.registerPlugin(FilePondPluginImagePreview);
+            FilePond.registerPlugin(FilePondPluginFilePoster);
 
             const input = document.querySelector('input[name="{{$itemName}}"]')
+
+
+            if('{{$fileName}}'){
+
+                FilePond.create(input, {
+                storeAsFile: true,
+                files: [
+        {
+            // the server file reference
+
+            // set type to local to indicate an already uploaded file
+            options: {
+                type: 'local',
+
+                // optional stub file information
+                file: {
+                    name: '{{$fileName}}',
+                },
+
+                // pass poster property
+                metadata: {
+                    poster: '{{$fileUrl}}',
+                },
+            },
+        },
+    ],
+                filePosterMinHeight: 100,
+                filePosterMaxHeight: 150,
+                filePosterHeight: 150,
+            }
+            );
+            }
+
+            else{
 
             FilePond.create(input, {
                 storeAsFile: true,
@@ -40,7 +76,9 @@
             });
 
 
+            }
 
+            
 
         </script>
     @endonce

@@ -1,0 +1,87 @@
+{
+  "_from": "filepond-plugin-file-poster",
+  "_id": "filepond-plugin-file-poster@2.4.4",
+  "_inBundle": false,
+  "_integrity": "sha512-scR7H07Ms6eUmJ1UeLlxSdZHM6r67SYQAdGc+bt5A6PB9fvho+qui7MnrS/emAwyaTmkUeq+ijumBMYn6Ny9fQ==",
+  "_location": "/filepond-plugin-file-poster",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "filepond-plugin-file-poster",
+    "name": "filepond-plugin-file-poster",
+    "escapedName": "filepond-plugin-file-poster",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/filepond-plugin-file-poster/-/filepond-plugin-file-poster-2.4.4.tgz",
+  "_shasum": "04d93db73713066beba7a20c5770b74897ab702b",
+  "_spec": "filepond-plugin-file-poster",
+  "_where": "C:\\laragon\\www\\laravel-test",
+  "author": {
+    "name": "PQINA",
+    "url": "https://pqina.nl/"
+  },
+  "browser": "dist/filepond-plugin-file-poster.js",
+  "browserslist": [
+    "last 1 version and not Explorer 10",
+    "Explorer 11",
+    "iOS >= 9",
+    "Android >= 4.4"
+  ],
+  "bugs": {
+    "url": "https://github.com/pqina/filepond-plugin-file-poster/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "File Poster Plugin for FilePond",
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "autoprefixer": "^9.5.0",
+    "cssnano": "^4.1.10",
+    "postcss": "^8.1.4",
+    "postcss-cli": "^8.1.0",
+    "postcss-nested": "^5.0.1",
+    "prettier": "^1.16.4",
+    "rollup": "^1.7.0",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-license": "^0.8.1",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-prettier": "^0.6.0",
+    "rollup-plugin-terser": "^4.0.4"
+  },
+  "files": [
+    "dist",
+    "types/*.d.ts"
+  ],
+  "homepage": "https://pqina.nl/filepond/",
+  "license": "MIT",
+  "main": "dist/filepond-plugin-file-poster.js",
+  "module": "dist/filepond-plugin-file-poster.esm.js",
+  "name": "filepond-plugin-file-poster",
+  "peerDependencies": {
+    "filepond": ">=4.x <5.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pqina/filepond-plugin-file-poster.git"
+  },
+  "scripts": {
+    "build": "npm run scripts | npm run styles",
+    "dev": "npm start",
+    "scripts": "npx rollup -c",
+    "start": "npx rollup -c -w",
+    "styles": "npm run styles:pretty && npm run styles:nano",
+    "styles:nano": "cat src/css/* | npx postcss --no-map --use postcss-nested autoprefixer --use cssnano | node banner-cli.js FilePondPluginFilePoster > dist/filepond-plugin-file-poster.min.css",
+    "styles:pretty": "cat src/css/* | npx postcss --no-map --use postcss-nested autoprefixer | npx prettier --single-quote --parser css | node banner-cli.js FilePondPluginFilePoster > dist/filepond-plugin-file-poster.css"
+  },
+  "types": "types/index.d.ts",
+  "version": "2.4.4"
+}

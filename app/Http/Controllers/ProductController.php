@@ -102,6 +102,8 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
+        //dd($request);
+
         $request->validate([
             'image' => 'required',
         ]);
