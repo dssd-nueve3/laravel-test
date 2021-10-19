@@ -16,6 +16,8 @@ class UploadFile extends Component
     public $item;
     public $fileUrl;
     public $fileName;
+    public $fileSize;
+    public $mimeType;
 
 
 
@@ -31,6 +33,8 @@ class UploadFile extends Component
     
                     $this->fileUrl = $file->getUrl();
                     $this->fileName = $file->file_name;
+                    $this->fileSize = $file->size;
+                    $this->mimeType = $file->mime_type;
     
                 }
     

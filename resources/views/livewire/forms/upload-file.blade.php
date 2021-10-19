@@ -25,7 +25,9 @@
 
         <script>
 
-            let files = 'esto: {{$fileName.' '.$fileUrl}}';
+            let files = 'esto: {{$fileName.' '.$fileUrl.' '.$fileSize.' '.$mimeType}}';
+
+            console.log(typeof '{{$fileSize}}');
 
 
             console.log(files)
@@ -36,8 +38,7 @@
 
             const input = document.querySelector('input[name="{{$itemName}}"]')
 
-
-            if('{{$fileName}}'){
+            if('{{$fileName}}'.length > 1){
 
                 FilePond.create(input, {
                 storeAsFile: true,
@@ -52,6 +53,8 @@
                 // optional stub file information
                 file: {
                     name: '{{$fileName}}',
+                    size: '{{$fileSize}}',
+                    type: '{{$mimeType}}',
                 },
 
                 // pass poster property
