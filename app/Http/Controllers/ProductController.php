@@ -45,7 +45,7 @@ class ProductController extends Controller
             'name' => 'required|unique:products|max:255|min:6',
             'description' => 'required',
             'price' => 'required',
-            'image' => 'required|image',
+            'image' => 'image',
         ]);
 
         $product = new Product();
@@ -104,17 +104,25 @@ class ProductController extends Controller
 
         //dd($request);
 
-        $request->validate([
-            'image' => 'required',
-        ]);
+        /*$request->validate([
+            'image' => 'image',
+        ]);*/
 
 
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
         $product->brand_id = $request->brand;
-        $product->image = $request->image;
-        $product->addMedia($request->image)->toMediaCollection('product_image');
+
+        if($request->image){
+            $product->image = $request->image;
+            $product->addMedia($request->image)->toMediaCollection('product_image');
+        }
+
+        else{
+            $product->delete();
+        }
+
         $product->save();
 
         return redirect()->route('product.index')->with('success', 'Product updated successfully');
