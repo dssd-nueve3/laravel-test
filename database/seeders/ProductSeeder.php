@@ -2,10 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
 {
+
+
     /**
      * Run the database seeds.
      *
@@ -13,6 +16,13 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Product::factory()->count(10)->create();
+       $products = Product::factory()->count(5)->create();
+
+        $faker = \Faker\Factory::create();
+        $imageUrl = $faker->imageUrl(640,480, null, false);
+
+        foreach($products as $product){
+            $product->addMediaFromUrl($imageUrl)->toMediaCollection('product_image');
+        }
     }
 }
