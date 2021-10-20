@@ -37,11 +37,13 @@
             FilePond.registerPlugin(FilePondPluginImagePreview);
             FilePond.registerPlugin(FilePondPluginFilePoster);
 
-            let input = document.getElementsByClassName("{{$itemName}}")
+            let input = document.getElementsByClassName("{{$itemName}}");
 
             console.log(input.length);
 
-            if('{{$fileName}}'.length > 1){
+            createFilePondElements(input);
+
+            /*if('{{$fileName}}'.length > 1){
 
                 FilePond.create(input, {
                 storeAsFile: true,
@@ -82,9 +84,54 @@
             });
 
 
+            }*/
+
+            function createFilePondElements(collection){
+
+                for (let element of collection) {
+
+                    if ('{{$fileName}}'.length > 1) {
+
+                        FilePond.create(element, {
+                                storeAsFile: true,
+                                files: [
+                                    {
+                                        // the server file reference
+
+                                        // set type to local to indicate an already uploaded file
+                                        options: {
+                                            type: 'local',
+
+                                            // optional stub file information
+                                            file: {
+                                                name: '{{$fileName}}',
+                                                size: '{{$fileSize}}',
+                                                type: '{{$mimeType}}',
+                                            },
+
+                                            // pass poster property
+                                            metadata: {
+                                                poster: '{{$fileUrl}}',
+                                            },
+                                        },
+                                    },
+                                ],
+                                filePosterMinHeight: 100,
+                                filePosterMaxHeight: 150,
+                                filePosterHeight: 150,
+                            }
+                        );
+                    } else {
+
+                        FilePond.create(element, {
+                            storeAsFile: true,
+                            allowMultiple: false,
+                        });
+
+                    }
+                }
+
             }
-
-
 
         </script>
     @endonce
