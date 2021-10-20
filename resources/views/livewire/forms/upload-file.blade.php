@@ -1,5 +1,5 @@
 <div>
-    <input id="{{$itemName}}" class="{{$itemName}}" type="file" name="{{$itemName}}" />
+    <input id="{{$itemName}}" class="{{$itemName}}" type="file" name="{{$itemName}}"/>
     {{$itemName}}
     @error($itemName)
     <small class="text-red-600">{{ $message }}</small>
@@ -22,8 +22,9 @@
         <script src="{{asset('vendor/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js')}}"></script>
         <script src="{{asset('vendor/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js')}}"></script>
         <script src="{{asset('vendor/filepond/dist/filepond.js')}}"></script>
-
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script>
+
 
             let files = 'esto: {{$fileName.' '.$fileUrl.' '.$fileSize.' '.$mimeType}}';
 
@@ -37,56 +38,13 @@
             FilePond.registerPlugin(FilePondPluginImagePreview);
             FilePond.registerPlugin(FilePondPluginFilePoster);
 
-            let input = document.getElementsByClassName("{{$itemName}}");
+            let input = $("[id^=image]"); // get elements not element
 
             console.log(input.length);
 
             createFilePondElements(input);
 
-            /*if('{{$fileName}}'.length > 1){
-
-                FilePond.create(input, {
-                storeAsFile: true,
-                files: [
-        {
-            // the server file reference
-
-            // set type to local to indicate an already uploaded file
-            options: {
-                type: 'local',
-
-                // optional stub file information
-                file: {
-                    name: '{{$fileName}}',
-                    size: '{{$fileSize}}',
-                    type: '{{$mimeType}}',
-                },
-
-                // pass poster property
-                metadata: {
-                    poster: '{{$fileUrl}}',
-                },
-            },
-        },
-    ],
-                filePosterMinHeight: 100,
-                filePosterMaxHeight: 150,
-                filePosterHeight: 150,
-            }
-            );
-            }
-
-            else{
-
-            FilePond.create(input, {
-                storeAsFile: true,
-                allowMultiple: false,
-            });
-
-
-            }*/
-
-            function createFilePondElements(collection){
+            function createFilePondElements(collection) {
 
                 for (let element of collection) {
 
