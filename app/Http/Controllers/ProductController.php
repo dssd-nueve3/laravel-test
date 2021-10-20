@@ -54,8 +54,11 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->brand_id = $request->brand;
-        $product->image = $request->image;
-        $product->addMedia($request->image)->toMediaCollection('product_image');
+
+        //$this->iterateOverImages($product, $request->files);
+
+        //$product->addMultipleMediaFromRequest($request->files);
+
         $product->save();
 
         return redirect()->route('product.index')->with('success', 'Product created successfully');
@@ -102,8 +105,6 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        //dd($request);
-
         /*$request->validate([
             'image' => 'image',
         ]);*/
@@ -142,4 +143,19 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('product.index')->with('success', 'Product deleted successfully');
     }
+
+    public function iterateOverImages($model, $files){
+
+        //$model->addMultipleMediaFromRequest($files);
+
+        foreach ($files as $propertyName => $file){
+
+            $model->$propertyName = $file;
+            $model->addMedia($file)->toMediaCollection('product_image');
+
+        }
+
+    }
+
+
 }
