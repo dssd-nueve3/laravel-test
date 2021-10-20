@@ -1,5 +1,5 @@
 <div>
-    <input id="{{$itemName}}" type="file" name="{{$itemName}}" />
+    <input id="{{$itemName}}" class="{{$itemName}}" type="file" name="{{$itemName}}" />
     {{$itemName}}
     @error($itemName)
     <small class="text-red-600">{{ $message }}</small>
@@ -31,12 +31,15 @@
 
 
             console.log(files)
+
             FilePond.registerPlugin(FilePondPluginFileValidateType);
             FilePond.registerPlugin(FilePondPluginFileValidateSize);
             FilePond.registerPlugin(FilePondPluginImagePreview);
             FilePond.registerPlugin(FilePondPluginFilePoster);
 
-            const input = document.querySelector('input[name="{{$itemName}}"]')
+            let input = document.getElementsByClassName("{{$itemName}}")
+
+            console.log(input.length);
 
             if('{{$fileName}}'.length > 1){
 
@@ -81,7 +84,7 @@
 
             }
 
-            
+
 
         </script>
     @endonce

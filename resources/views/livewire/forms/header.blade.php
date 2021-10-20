@@ -1,4 +1,3 @@
 <div>
-    <{{$type}} class="uppercase"><span class="font-bold">{{ __($action) }}</span> / <span class="
-        ">{{ __($model) }}</span></{{$type}}>
+    <{{$element_type}} class="uppercase bold"><span class="font-bold">{{ __($action) }}</span> / <small class="text-gray-500">{{ __($model) }}</small></{{$element_type}}>
 </div>

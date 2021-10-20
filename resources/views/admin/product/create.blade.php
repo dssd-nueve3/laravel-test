@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="max-w-6xl mx-auto shadow p-3 mt-4 bg-white rounded">
-        <livewire:forms.header :action="'Create'" :model="'Product'" :type="'h2'"/>
+        <livewire:forms.header :action="'Create'" :model="'Product'" :element_type="'h6'"/>
         <form enctype="multipart/form-data" action="{{route('product.store')}}" method="POST">
             @csrf
             <div class="form-item-container my-2 p-2">
@@ -15,6 +15,12 @@
                 <livewire:forms.label for="image" :value="'Image'"/>
                 <livewire:forms.upload-file :itemName="'image'" :model="'Product'"/>
             </div>
+
+            <div class="form-item-container my-2 p-2">
+                <livewire:forms.label for="image" :value="'Image'"/>
+                <livewire:forms.upload-file :itemName="'image2'" :model="'Product'"/>
+            </div>
+
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="price" :value="'Price'"/>
                 <livewire:forms.input-form id="'price'" :itemName="'price'" :itemValue="''" :itemType="'number'" required autocomplete="current-password" autofocus :bladeAttributes="['min' => '0','step' => '0.01',]" />
