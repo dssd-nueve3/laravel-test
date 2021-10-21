@@ -21,14 +21,17 @@ class UploadFile extends Component
     public $collectionName;
     public $acceptedFiles;
     public $acceptedMimes;
+    public $multiple;
+    public $maxUploadFiles;
 
 
-
-    public function mount($model, $itemName, $collectionName, $acceptedFiles)
+    public function mount($model, $itemName, $collectionName, $acceptedFiles, $multiple, $maxUploadFiles)
     {
         $this->itemName = $itemName;
         $this->collectionName = $collectionName;
         $this->acceptedFiles = $acceptedFiles;
+        $this->multiple = $multiple;
+        $this->maxUploadFiles = $this->multiple ? $maxUploadFiles : 1;
         $this->defineMimeTypes();
 
         if(gettype($model) === 'object'){

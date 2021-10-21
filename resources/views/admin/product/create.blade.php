@@ -13,7 +13,7 @@
             </div>
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="image" :value="'Image'"/>
-                <livewire:forms.upload-file :itemName="'image'" :model="'Product'" :collectionName="'product_gallery'" :acceptedFiles="'.pdf,.png,.jpg,.jpeg'"/>
+                <livewire:forms.upload-file :itemName="'image'" :model="'Product'" :collectionName="'product_gallery'" :acceptedFiles="'.pdf,.png,.jpg,.jpeg'" :multiple="false" :maxUploadFiles="'10'"/>
             </div>
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="price" :value="'Price'"/>
