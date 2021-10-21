@@ -18,17 +18,23 @@ class UploadFile extends Component
     public $fileName;
     public $fileSize;
     public $mimeType;
+    public $collectionName;
+    public $acceptedFiles;
+    public $acceptedMimes;
 
 
 
-    public function mount($model, $itemName)
+    public function mount($model, $itemName, $collectionName, $acceptedFiles)
     {
         $this->itemName = $itemName;
+        $this->collectionName = $collectionName;
+        $this->acceptedFiles = $acceptedFiles;
+        $this->defineMimeTypes();
 
         if(gettype($model) === 'object'){
 
-            if ($model->getMedia('product_image')) {
-                $files = $model->getMedia('product_image');
+            if ($model->getMedia($this->collectionName)) {
+                $files = $model->getMedia($this->collectionName);
                 foreach($files as $file){
     
                     $this->fileUrl = $file->getUrl();
@@ -41,7 +47,27 @@ class UploadFile extends Component
             }
         }
 
+    }
 
+    public function defineMimeTypes(){
+
+        $acceptedFiles = explode(',', $this->acceptedFiles);
+
+        $mimes = [
+           '.jpeg' => 'image/jpeg',
+           '.jpg' => 'image/jpeg',
+           '.pdf' => 'application/pdf',
+           '.png' => 'image/png'
+
+        ];
+
+        foreach($acceptedFiles as $acceptedFile){
+
+            $this->acceptedMimes .= $mimes[$acceptedFile] . ",";
+
+        }
+
+        $this->acceptedMimes = substr($this->acceptedMimes, 0, -1);
 
     }
 

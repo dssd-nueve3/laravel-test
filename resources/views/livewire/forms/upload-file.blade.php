@@ -1,6 +1,5 @@
 <div>
-    <input id="{{$itemName}}" class="{{$itemName}}" type="file" name="{{$itemName}}"/>
-    {{$itemName}}
+    <input id="{{$itemName}}" class="{{$itemName}}" type="file" name="{{$itemName}}" accept="{{$acceptedMimes}}"/>
     @error($itemName)
     <small class="text-red-600">{{ $message }}</small>
     @enderror

@@ -41,6 +41,8 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
+        //dd($request);
+
       $request->validate([
             'name' => 'required|unique:products|max:255|min:6',
             'description' => 'required',
@@ -156,6 +158,12 @@ class ProductController extends Controller
         }
 
     }
+
+    /*public function registerMediaCollections(Request $request){
+
+        $this->addMediaCollection()
+
+    }*/
 
 
 }
