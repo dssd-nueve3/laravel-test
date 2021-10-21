@@ -41,8 +41,8 @@
                             {!!  $product->description !!}
                         </td>
                         <td class="py-4 px-6 border-b border-grey-light">
-                            @foreach($product->getMedia('product_image') as $image)
-                                  <img src=" {{$image->getUrl()}}" alt="" width="80">
+                            @foreach($product->getMedia('product_gallery') as $image)
+                                  <img src=" {{$image->getUrl('thumb')}}" alt="" width="80">
                             @endforeach
 
                         </td>
