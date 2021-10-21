@@ -31,6 +31,7 @@
                 </thead>
                 {{--SHOW ITEMS--}}
                 <tbody>
+                   {{-- {{dd($products);}}  --}}
                 @foreach($products as $product)
                     <tr>
                         <td class="py-4 px-6 border-b border-grey-light">

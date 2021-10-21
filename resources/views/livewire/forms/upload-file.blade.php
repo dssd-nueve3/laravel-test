@@ -1,5 +1,6 @@
 <div>
     <input id="{{$itemName}}" class="{{$itemName}}" type="file" name="{{$itemName}}" accept="{{$acceptedMimes}}"/>
+    <input type="text" name="collectionName" value="{{$collectionName}}" hidden>
     @error($itemName)
     <small class="text-red-600">{{ $message }}</small>
     @enderror

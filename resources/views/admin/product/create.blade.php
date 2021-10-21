@@ -15,7 +15,6 @@
                 <livewire:forms.label for="image" :value="'Image'"/>
                 <livewire:forms.upload-file :itemName="'image'" :model="'Product'" :collectionName="'product_gallery'" :acceptedFiles="'.pdf,.png,.jpg,.jpeg'"/>
             </div>
-
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="price" :value="'Price'"/>
                 <livewire:forms.input-form id="'price'" :itemName="'price'" :itemValue="''" :itemType="'number'" required autocomplete="current-password" autofocus :bladeAttributes="['min' => '0','step' => '0.01',]" />

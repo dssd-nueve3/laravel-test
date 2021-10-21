@@ -41,13 +41,10 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        //dd($request);
-
       $request->validate([
             'name' => 'required|unique:products|max:255|min:6',
             'description' => 'required',
             'price' => 'required',
-            'image' => 'image',
         ]);
 
         $product = new Product();
@@ -56,6 +53,9 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->brand_id = $request->brand;
+
+        $product->image = $request->image;
+        $product->addMedia($request->image)->toMediaCollection($request->collectionName);
 
         //$this->iterateOverImages($product, $request->files);
 
@@ -158,12 +158,5 @@ class ProductController extends Controller
         }
 
     }
-
-    /*public function registerMediaCollections(Request $request){
-
-        $this->addMediaCollection()
-
-    }*/
-
 
 }
