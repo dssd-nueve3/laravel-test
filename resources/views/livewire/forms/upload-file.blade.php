@@ -1,5 +1,5 @@
 <div>
-    <input id="{{$itemName}}" class="{{$itemName}}" type="file" name="{{$itemName}}" accept="{{$acceptedMimes}}" {{$multiple ? 'multiple' : ''}} data-max-files="{{ $maxUploadFiles > 1 ? $maxUploadFiles : 1}}"/>
+    <input id="{{$itemName}}" class="{{$itemName}}" type="file" name="{{$itemName}}[]" accept="{{$acceptedMimes}}" {{$multiple ? 'multiple' : ''}} data-max-files="{{ $maxUploadFiles > 1 ? $maxUploadFiles : 1}}"/>
     <input type="text" name="collectionName" value="{{$collectionName}}" hidden>
     @error($itemName)
     <small class="text-red-600">{{ $message }}</small>

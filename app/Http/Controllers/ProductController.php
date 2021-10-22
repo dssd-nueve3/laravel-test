@@ -54,8 +54,16 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->brand_id = $request->brand;
 
-        $product->image = $request->image;
-        $product->addMedia($request->image)->toMediaCollection($request->collectionName);
+        //dd($request->image);
+
+        //$product->addMedia($request->image)->toMediaCollection($request->collectionName);
+
+        foreach($request->image as $image){
+
+            $product->addMedia($image)->toMediaCollection($request->collectionName);
+
+        }
+
 
         //$this->iterateOverImages($product, $request->files);
 
