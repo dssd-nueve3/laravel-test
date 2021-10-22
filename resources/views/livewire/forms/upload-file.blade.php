@@ -25,15 +25,16 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script>
 
+            console.log('hola');
 
-            let files = 'esto: {{$fileName.' '.$fileUrl.' '.$fileSize.' '.$mimeType}}';
+            //let files = 'esto: {{$fileName.' '.$fileUrl.' '.$fileSize.' '.$mimeType}}';
 
-            console.log(typeof '{{$fileSize}}');
+           // console.log(typeof '{{$fileSize}}');
 
 
-            console.log(files)
+            //console.log('{{$uploadedFiles}}');
 
-            FilePond.registerPlugin(FilePondPluginFileValidateType);
+            /*FilePond.registerPlugin(FilePondPluginFileValidateType);
             FilePond.registerPlugin(FilePondPluginFileValidateSize);
             FilePond.registerPlugin(FilePondPluginImagePreview);
             FilePond.registerPlugin(FilePondPluginFilePoster);
@@ -42,7 +43,7 @@
 
             console.log(input.length);
 
-            createFilePondElements(input);
+            createFilePondElements(input);*/
 
             function createFilePondElements(collection) {
 
@@ -52,6 +53,7 @@
 
                         FilePond.create(element, {
                                 storeAsFile: true,
+                                allowMultiple: true,
                                 files: [
                                     {
                                         // the server file reference

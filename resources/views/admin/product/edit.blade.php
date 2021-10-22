@@ -20,7 +20,7 @@
             {{--UPLOAD FILE--}}
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="image-{{$product->id}}" :value="'Image'"/>
-                <livewire:forms.upload-file :itemName="'image'" :model="$product" :collectionName="'product_image'" :acceptedFiles="'.pdf,.png,.jpg,.jpeg'" :multiple="false" :maxUploadFiles="'3'"/>
+                <livewire:forms.upload-file :itemName="'image'" :model="$product" :collectionName="'product_gallery'" :acceptedFiles="'.pdf,.png,.jpg,.jpeg'" :multiple="true" :maxUploadFiles="'3'"/>
             </div>
             {{--INPUT--}}
             <div class="form-item-container my-2 p-2">
