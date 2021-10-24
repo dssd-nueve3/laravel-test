@@ -24,15 +24,10 @@
         <script src="{{asset('vendor/filepond/dist/filepond.js')}}"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script>
+        
+        let files = '{!!$uploadedFiles!!}'.length > 0 ? JSON.parse('{!!$uploadedFiles!!}') : false;
 
-
-            let files = 'esto: {{$fileName.' '.$fileUrl.' '.$fileSize.' '.$mimeType}}';
-
-            console.log(typeof '{{$fileSize}}');
-
-
-            console.log(files)
-
+            //let files = 'esto: {{$fileName.' '.$fileUrl.' '.$fileSize.' '.$mimeType}}';
             FilePond.registerPlugin(FilePondPluginFileValidateType);
             FilePond.registerPlugin(FilePondPluginFileValidateSize);
             FilePond.registerPlugin(FilePondPluginImagePreview);
@@ -40,40 +35,52 @@
 
             let input = $("[id^=image]"); // get elements not element
 
-            console.log(input.length);
+            createFilePondElements(input, files);
 
-            createFilePondElements(input);
+            function createFilePondElements(collectionElements, files) {
 
-            function createFilePondElements(collection) {
+                if(!files){
 
-                for (let element of collection) {
+                    let = filesNumber = 0;
 
-                    if ('{{$fileName}}'.length > 1) {
+                }
+
+                else{
+
+                    let = filesNumber = Object.keys(files).length;
+
+                }
+
+                let filesPoster = [];
+
+                for(let fileUploaded in files){
+
+                let file =  {options: {
+                        type: 'local',
+                        file: {
+                                    name: files[fileUploaded].fileName,
+                                    size: files[fileUploaded].fileSize,
+                                    type: files[fileUploaded].mimeType,
+                                },
+
+                        metadata: {
+                                    poster: files[fileUploaded].fileUrl,
+                                },
+
+                    }};
+
+                    filesPoster.push(file);
+
+                }
+
+                for (let element of collectionElements) {
+
+                    if (filesNumber >= 1) {
 
                         FilePond.create(element, {
                                 storeAsFile: true,
-                                files: [
-                                    {
-                                        // the server file reference
-
-                                        // set type to local to indicate an already uploaded file
-                                        options: {
-                                            type: 'local',
-
-                                            // optional stub file information
-                                            file: {
-                                                name: '{{$fileName}}',
-                                                size: '{{$fileSize}}',
-                                                type: '{{$mimeType}}',
-                                            },
-
-                                            // pass poster property
-                                            metadata: {
-                                                poster: '{{$fileUrl}}',
-                                            },
-                                        },
-                                    },
-                                ],
+                                allowMultiple: true,
+                                files:filesPoster,
                                 filePosterMinHeight: 100,
                                 filePosterMaxHeight: 150,
                                 filePosterHeight: 150,
