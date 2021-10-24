@@ -23,7 +23,7 @@ class UploadFile extends Component
     public $acceptedMimes;
     public $multiple;
     public $maxUploadFiles;
-    public $uploadedFiles = array();
+    public $uploadedFiles;
 
 
     public function mount($model, $itemName, $collectionName, $acceptedFiles, $multiple, $maxUploadFiles)
@@ -46,8 +46,13 @@ class UploadFile extends Component
                     $this->uploadedFiles[$file->file_name]['fileSize'] = $file->size;
                     $this->uploadedFiles[$file->file_name]['mimeType'] = $file->mime_type;   
                 }
+
+                $this->uploadedFiles = json_encode($this->uploadedFiles);
     
             }
+        }
+        else{
+            $this->uploadedFiles = false;
         }
 
     }

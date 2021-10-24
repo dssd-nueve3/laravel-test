@@ -115,9 +115,13 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
+
+
         /*$request->validate([
             'image' => 'image',
         ]);*/
+
+        //dd($request);
 
 
         $product->name = $request->name;
@@ -125,11 +129,17 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->brand_id = $request->brand;
 
-        if($request->image){
-            $product->image = $request->image;
-            $product->addMedia($request->image)->toMediaCollection('product_image');
-        }
 
+        if($request->image){
+
+            foreach($request->image as $image){
+
+                if(gettype($image) != 'string'){
+                $product->addMedia($image)->toMediaCollection($request->collectionName);
+                }
+            }
+        
+        }
         else{
             $product->delete();
         }
