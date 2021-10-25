@@ -12,12 +12,25 @@
                 <livewire:forms.text-area :itemId="'description'" :itemName="'description'" :itemValue="''"/>
             </div>
             <div class="form-item-container my-2 p-2">
+
                 <livewire:forms.label for="image" :value="'Image'"/>
-                <livewire:forms.upload-file :itemName="'image'" :model="'Product'" :collectionName="'product_image'" :acceptedFiles="'.pdf,.png,.jpg,.jpeg'" :multiple="true" :maxUploadFiles="'3'"/>
+
+                <livewire:forms.upload-file :itemName="'image'"
+                                            :model="'Product'"
+                                            :collectionName="'product_image'"
+                                            :acceptedFiles="'.pdf,.png,.jpg,.jpeg'"
+                                            :multiple="false"
+                                            :maxUploadFiles="'3'"/>
             </div>
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="image2" :value="'Image2'"/>
-                <livewire:forms.upload-file :itemName="'image2'" :model="'Product'" :collectionName="'product_gallery'" :acceptedFiles="'.pdf,.png,.jpg,.jpeg'" :multiple="true" :maxUploadFiles="'3'"/>
+
+                <livewire:forms.upload-file :itemName="'image2'"
+                                            :model="'Product'"
+                                            :collectionName="'product_gallery'"
+                                            :acceptedFiles="'.pdf,.png,.jpg,.jpeg'"
+                                            :multiple="true"
+                                            :maxUploadFiles="'3'"/>
             </div>
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="price" :value="'Price'"/>

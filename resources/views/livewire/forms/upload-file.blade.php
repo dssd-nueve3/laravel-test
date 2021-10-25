@@ -24,14 +24,17 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script>
 
+
+        console.log( JSON.parse('{!! $uploadedFiles !!}'))
         let files = '{!!$uploadedFiles!!}'.length > 0 ? JSON.parse('{!!$uploadedFiles!!}') : false;
-            //let files = 'esto: {{$fileName.' '.$fileUrl.' '.$fileSize.' '.$mimeType}}';
-            FilePond.registerPlugin(FilePondPluginFileValidateType);
+
+
+           /* FilePond.registerPlugin(FilePondPluginFileValidateType);
             FilePond.registerPlugin(FilePondPluginFileValidateSize);
             FilePond.registerPlugin(FilePondPluginImagePreview);
-            FilePond.registerPlugin(FilePondPluginFilePoster);
+            FilePond.registerPlugin(FilePondPluginFilePoster);*/
 
-            let input = $("[id^=image]"); // get elements not element
+            let input = $("[id^={{$itemName}}]"); // get elements not element
 
             //console.log(input);
 
@@ -46,7 +49,7 @@
                 let collectionName;
 
                 for(let fileUploaded in files){
-
+                    console.log(files[fileUploaded].fileName)
                 //let collectionName = fileUploaded;
 
                  for( let fileI in files[collectionName]){

@@ -80,7 +80,6 @@ class ProductController extends Controller
 
 
         }
-
     }
 
 
@@ -97,6 +96,7 @@ class ProductController extends Controller
 
 
     }
+
 
     /**
      * Display the specified resource.
@@ -145,10 +145,10 @@ class ProductController extends Controller
 
         //dd($request);
 
-
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
+
         $product->brand_id = $request->brand;
 
 
@@ -202,10 +202,13 @@ class ProductController extends Controller
 
         //$model->addMultipleMediaFromRequest($files);
 
-        foreach ($files as $propertyName => $file){
+        foreach ($files as $key => $file){
+            if($key == "image"){
+                $model->addMedia($file)->toMediaCollection($model->name.'_image');
+            }elseif ($key == "gallery"){
+                $model->addMedia($file)->toMediaCollection($model->name.'_gallery');
+            }
 
-            $model->$propertyName = $file;
-            $model->addMedia($file)->toMediaCollection('product_image');
 
         }
 

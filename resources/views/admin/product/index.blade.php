@@ -1,7 +1,7 @@
 <x-app-layout>
-    <div class="max-w-6xl mx-auto shadow p-3 mt-4 bg-white rounded">
+    <div class="max-w-6xl mx-auto p-3 mt-4">
         {{--CREATE NET ITEM--}}
-        <a href="/product/create" title="Create a product" class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 my-4 rounded">
+        <a href="/product/create" title="Create a product" class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 my-4 rounded">
             <i class="fas fa-plus-circle"></i> {{__('New')}}
         </a>
         {{-- TABLE ITEMS LIST--}}
@@ -27,8 +27,7 @@
                     <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
                         {{__('Brand')}}
                     </th>
-                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light" colspan="3">
-                        {{__('Acciones')}}
+                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light" colspan="2">
                     </th>
                 </tr>
                 </thead>
@@ -63,14 +62,13 @@
                         </td>
                         {{--CRUD ITEMS--}}
                         <td>
-                            <a class="bg-green-400 hover:bg-green-600 text-white p-2 rounded " href="/product/{{$product->id}}/edit"><i class="fas fa-edit"></i></a>
+                            <a class="bg-green-400 hover:bg-green-600 text-white  rounded p-2 " href="/product/{{$product->id}}/edit"><i class="fas fa-edit"></i></a>
                         </td>
                         <td>
                             <form action="{{route('product.destroy',$product->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button type="submit" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold  p-2 rounded">
                                     <i class="fas fa-trash text-success"></i>
                                 </button>
                             </form>

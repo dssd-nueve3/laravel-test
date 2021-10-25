@@ -35,53 +35,37 @@ class UploadFile extends Component
         $this->maxUploadFiles = $this->multiple ? $maxUploadFiles : 1;
         $this->defineMimeTypes();
 
-        if(gettype($model) === 'object'){
-
+        if (gettype($model) === 'object') {
             $mediaCollections = $model->getRegisteredMediaCollections();
-
-            foreach($mediaCollections as $media){
+            foreach ($mediaCollections as $media) {
 
                 if ($model->getMedia($media->name)) {
                     $files = $model->getMedia($media->name);
-
-                    foreach($files as $file){
-
-                        $this->uploadedFiles[$media->name][$file->file_name]['fileUrl'] = $file->getUrl();
-                        $this->uploadedFiles[$media->name][$file->file_name]['fileName'] = $file->file_name;
-                        $this->uploadedFiles[$media->name][$file->file_name]['fileSize'] = $file->size;
-                        $this->uploadedFiles[$media->name][$file->file_name]['mimeType'] = $file->mime_type;
-                        $this->uploadedFiles[$media->name][$file->file_name]['collectionName'] = $media->name;
-
-                    }
-
+                    $this->uploadedFiles [$media->name]= $files;
                 }
-
             }
-
             $this->uploadedFiles = json_encode($this->uploadedFiles);
 
-
-
-        }
-        else{
+        } else {
             $this->uploadedFiles = false;
         }
 
     }
 
-    public function defineMimeTypes(){
+    public function defineMimeTypes()
+    {
 
         $acceptedFiles = explode(',', $this->acceptedFiles);
 
         $mimes = [
-           '.jpeg' => 'image/jpeg',
-           '.jpg' => 'image/jpeg',
-           '.pdf' => 'application/pdf',
-           '.png' => 'image/png'
+            '.jpeg' => 'image/jpeg',
+            '.jpg' => 'image/jpeg',
+            '.pdf' => 'application/pdf',
+            '.png' => 'image/png'
 
         ];
 
-        foreach($acceptedFiles as $acceptedFile){
+        foreach ($acceptedFiles as $acceptedFile) {
 
             $this->acceptedMimes .= $mimes[$acceptedFile] . ",";
 
