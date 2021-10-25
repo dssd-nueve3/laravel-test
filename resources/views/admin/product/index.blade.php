@@ -51,6 +51,7 @@
                         </td>
                         <td class="py-4 px-6 border-b border-grey-light">
                             @foreach($product->getMedia('product_gallery') as $image)
+                                {{-- {{dd($product->getMedia('product_gallery'))}} --}}
                                   <img src=" {{$image->getUrl('thumb')}}" alt="" width="80">
                             @endforeach
 
