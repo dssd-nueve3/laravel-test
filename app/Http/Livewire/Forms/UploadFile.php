@@ -37,19 +37,31 @@ class UploadFile extends Component
 
         if(gettype($model) === 'object'){
 
-            if ($model->getMedia($this->collectionName)) {
-                $files = $model->getMedia($this->collectionName);
-                foreach($files as $file){
+            $mediaCollections = $model->getRegisteredMediaCollections();
 
-                    $this->uploadedFiles[$file->file_name]['fileUrl'] = $file->getUrl();
-                    $this->uploadedFiles[$file->file_name]['fileName'] = $file->file_name;
-                    $this->uploadedFiles[$file->file_name]['fileSize'] = $file->size;
-                    $this->uploadedFiles[$file->file_name]['mimeType'] = $file->mime_type;   
+            foreach($mediaCollections as $media){
+
+                if ($model->getMedia($media->name)) {
+                    $files = $model->getMedia($media->name);
+
+                    foreach($files as $file){
+    
+                        $this->uploadedFiles[$file->file_name]['fileUrl'] = $file->getUrl();
+                        $this->uploadedFiles[$file->file_name]['fileName'] = $file->file_name;
+                        $this->uploadedFiles[$file->file_name]['fileSize'] = $file->size;
+                        $this->uploadedFiles[$file->file_name]['mimeType'] = $file->mime_type;
+                        $this->uploadedFiles[$file->file_name]['collectionName'] = $media->name;  
+       
+                    }
+
                 }
-
-                $this->uploadedFiles = json_encode($this->uploadedFiles);
     
             }
+
+            $this->uploadedFiles = json_encode($this->uploadedFiles);
+
+
+
         }
         else{
             $this->uploadedFiles = false;

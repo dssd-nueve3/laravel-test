@@ -19,6 +19,9 @@
                         {{__('Image')}}
                     </th>
                     <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+                        {{__('Image2')}}
+                    </th>
+                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
                         {{__('Price')}}
                     </th>
                     <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
@@ -39,6 +42,12 @@
                         </td>
                         <td class="py-4 px-6 border-b border-grey-light">
                             {!!  $product->description !!}
+                        </td>
+                        <td class="py-4 px-6 border-b border-grey-light">
+                            @foreach($product->getMedia('product_image') as $image)
+                                  <img src=" {{$image->getUrl('thumb')}}" alt="" width="80">
+                            @endforeach
+
                         </td>
                         <td class="py-4 px-6 border-b border-grey-light">
                             @foreach($product->getMedia('product_gallery') as $image)

@@ -1,11 +1,10 @@
 <div>
     <input id="{{$itemName}}" class="{{$itemName}}" type="file" name="{{$itemName}}[]" accept="{{$acceptedMimes}}" {{$multiple ? 'multiple' : ''}} data-max-files="{{ $maxUploadFiles > 1 ? $maxUploadFiles : 1}}"/>
-    <input type="text" name="collectionName" value="{{$collectionName}}" hidden>
+    <input type="text" name="{{$itemName}}_collectionName" value="{{$collectionName}}" hidden>
     @error($itemName)
     <small class="text-red-600">{{ $message }}</small>
     @enderror
 </div>
-
 @push('styles')
     @once
         <link rel="stylesheet" href="{{asset('/vendor/filepond/dist/filepond.css')}}">
@@ -26,7 +25,6 @@
         <script>
         
         let files = '{!!$uploadedFiles!!}'.length > 0 ? JSON.parse('{!!$uploadedFiles!!}') : false;
-
             //let files = 'esto: {{$fileName.' '.$fileUrl.' '.$fileSize.' '.$mimeType}}';
             FilePond.registerPlugin(FilePondPluginFileValidateType);
             FilePond.registerPlugin(FilePondPluginFileValidateSize);
@@ -39,21 +37,13 @@
 
             function createFilePondElements(collectionElements, files) {
 
-                if(!files){
-
-                    let = filesNumber = 0;
-
-                }
-
-                else{
-
-                    let = filesNumber = Object.keys(files).length;
-
-                }
+                let filesNumber = !files ? 0 : Object.keys(files).length;
 
                 let filesPoster = [];
 
                 for(let fileUploaded in files){
+
+                //let collectionName = files[fileUploaded].collectionName;
 
                 let file =  {options: {
                         type: 'local',
@@ -75,7 +65,12 @@
 
                 for (let element of collectionElements) {
 
+                    //console.log(element);
+
+                    //console.log($('input[name="{{$itemName}}_collectionName"]').val());
+
                     if (filesNumber >= 1) {
+
 
                         FilePond.create(element, {
                                 storeAsFile: true,

@@ -41,6 +41,8 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
+        //dd($request);
+
       $request->validate([
             'name' => 'required|unique:products|max:255|min:6',
             'description' => 'required',
@@ -58,11 +60,28 @@ class ProductController extends Controller
 
         //$product->addMedia($request->image)->toMediaCollection($request->collectionName);
 
-        foreach($request->image as $image){
+        if($request->image){
 
-            $product->addMedia($image)->toMediaCollection($request->collectionName);
+            foreach($request->image as $propertyName => $image){
+
+                $product->addMedia($image)->toMediaCollection($request->image_collectionName);
+                $product->image = $propertyName;
+    
+            }
 
         }
+
+        if($request->image2){
+
+        foreach($request->image2 as $propertyName => $image2){
+
+            $product->addMedia($image2)->toMediaCollection($request->image2_collectionName);
+            $product->image2 = $propertyName;
+
+
+        }
+
+    }
 
 
         //$this->iterateOverImages($product, $request->files);
@@ -135,11 +154,23 @@ class ProductController extends Controller
             foreach($request->image as $image){
 
                 if(gettype($image) != 'string'){
-                $product->addMedia($image)->toMediaCollection($request->collectionName);
+                $product->addMedia($image)->toMediaCollection($request->image_collectionName);
                 }
             }
         
         }
+
+        if($request->image2){
+
+            foreach($request->image2 as $image2){
+
+                if(gettype($image2) != 'string'){
+                $product->addMedia($image2)->toMediaCollection($request->image2_collectionName);
+                }
+            }
+        
+        }
+
         else{
             $product->delete();
         }
