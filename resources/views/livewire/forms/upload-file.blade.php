@@ -23,25 +23,35 @@
         <script src="{{asset('vendor/filepond/dist/filepond.js')}}"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script>
-
-
-        console.log( JSON.parse('{!! $uploadedFiles !!}'))
-        let files = '{!!$uploadedFiles!!}'.length > 0 ? JSON.parse('{!!$uploadedFiles!!}') : false;
-
-
-           /* FilePond.registerPlugin(FilePondPluginFileValidateType);
+            // PLUGIN VARS
+            FilePond.registerPlugin(FilePondPluginFileValidateType);
             FilePond.registerPlugin(FilePondPluginFileValidateSize);
             FilePond.registerPlugin(FilePondPluginImagePreview);
-            FilePond.registerPlugin(FilePondPluginFilePoster);*/
+            FilePond.registerPlugin(FilePondPluginFilePoster);
 
-            let input = $("[id^={{$itemName}}]"); // get elements not element
+            // COMPONENT VARS
+            let input = $("[id^={{$itemName}}]");
 
-            //console.log(input);
+            let url = window.location.href;
+            let newUrl = "";
 
-            createFilePondElements(input, files);
+
+
+
+            // crear Poster únicamente cuando en edit;
+
+
+
+
+
+            if(getImageDirectoryByFullURL(url) == 'edit') {
+                let files = {!! $uploadedFiles !!} ;
+            }
+
+
+            createFilePondElements(input);
 
             function createFilePondElements(collectionElements, files) {
-
                 let filesNumber = !files ? 0 : Object.keys(files).length;
 
                 let filesPoster = [];
@@ -49,7 +59,6 @@
                 let collectionName;
 
                 for(let fileUploaded in files){
-                    console.log(files[fileUploaded].fileName)
                 //let collectionName = fileUploaded;
 
                  for( let fileI in files[collectionName]){
@@ -75,7 +84,6 @@
 
                 }
 
-                console.log(filesPoster);
                 //console.log(collectionElements);
 
                 for (let element of collectionElements) {
@@ -107,6 +115,11 @@
 
             }
 
+            function getImageDirectoryByFullURL(url){
+                url = url.split('/');
+                url = url.pop();
+                return url;
+            }
         </script>
     @endonce
 @endpush
