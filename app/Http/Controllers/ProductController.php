@@ -41,13 +41,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        //dd($request);
+        //  dd($request);
 
-      $request->validate([
+      /*$request->validate([
             'name' => 'required|unique:products|max:255|min:6',
             'description' => 'required',
             'price' => 'required',
-        ]);
+        ]);*/
 
         $product = new Product();
 
@@ -62,21 +62,21 @@ class ProductController extends Controller
 
         if($request->image){
 
-            foreach($request->image as $propertyName => $image){
+            foreach($request->image as $image){
 
                 $product->addMedia($image)->toMediaCollection($request->image_collectionName);
-                $product->image = $propertyName;
-    
+                $product->image = $image;
+
             }
 
         }
 
         if($request->image2){
 
-        foreach($request->image2 as $propertyName => $image2){
+        foreach($request->image2 as $image2){
 
             $product->addMedia($image2)->toMediaCollection($request->image2_collectionName);
-            $product->image2 = $propertyName;
+            $product->image2 = $image2;
 
 
         }
@@ -86,7 +86,10 @@ class ProductController extends Controller
 
         //$this->iterateOverImages($product, $request->files);
 
-        //$product->addMultipleMediaFromRequest($request->files);
+        //$model->$propertyName = $file;
+        //$model->addMedia($file)->toMediaCollection('product_image');
+
+        $product->addAllMediaFromRequest()->toMediaCollection('product_image');
 
         $product->save();
 
@@ -157,7 +160,7 @@ class ProductController extends Controller
                 $product->addMedia($image)->toMediaCollection($request->image_collectionName);
                 }
             }
-        
+
         }
 
         if($request->image2){
@@ -168,7 +171,7 @@ class ProductController extends Controller
                 $product->addMedia($image2)->toMediaCollection($request->image2_collectionName);
                 }
             }
-        
+
         }
 
         else{

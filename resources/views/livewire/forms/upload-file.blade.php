@@ -23,7 +23,7 @@
         <script src="{{asset('vendor/filepond/dist/filepond.js')}}"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script>
-        
+
         let files = '{!!$uploadedFiles!!}'.length > 0 ? JSON.parse('{!!$uploadedFiles!!}') : false;
             //let files = 'esto: {{$fileName.' '.$fileUrl.' '.$fileSize.' '.$mimeType}}';
             FilePond.registerPlugin(FilePondPluginFileValidateType);
@@ -33,6 +33,8 @@
 
             let input = $("[id^=image]"); // get elements not element
 
+            //console.log(input);
+
             createFilePondElements(input, files);
 
             function createFilePondElements(collectionElements, files) {
@@ -40,48 +42,56 @@
                 let filesNumber = !files ? 0 : Object.keys(files).length;
 
                 let filesPoster = [];
+                let collections = [];
+                let collectionName;
 
                 for(let fileUploaded in files){
 
-                //let collectionName = files[fileUploaded].collectionName;
+                //let collectionName = fileUploaded;
 
-                let file =  {options: {
-                        type: 'local',
-                        file: {
-                                    name: files[fileUploaded].fileName,
-                                    size: files[fileUploaded].fileSize,
-                                    type: files[fileUploaded].mimeType,
-                                },
+                 for( let fileI in files[collectionName]){
 
-                        metadata: {
-                                    poster: files[fileUploaded].fileUrl,
-                                },
+                     //console.log(files[collectionName][fileI].fileSize);
 
-                    }};
+                     let file =  {options: {
+                             type: 'local',
+                             file: {
+                                 name: files[collectionName][fileI].fileName,
+                                 size: files[collectionName][fileI].fileSize,
+                                 type: files[collectionName][fileI].mimeType,
+                             },
+                             metadata: {
+                                 poster: files[collectionName][fileI].fileUrl,
+                             },
 
-                    filesPoster.push(file);
+                         }};
+
+                     filesPoster.push(file);
+
+                 }
 
                 }
 
+                console.log(filesPoster);
+                //console.log(collectionElements);
+
                 for (let element of collectionElements) {
 
-                    //console.log(element);
-
-                    //console.log($('input[name="{{$itemName}}_collectionName"]').val());
-
                     if (filesNumber >= 1) {
-
 
                         FilePond.create(element, {
                                 storeAsFile: true,
                                 allowMultiple: true,
-                                files:filesPoster,
+                                files:filesPoster[collectionName],
                                 filePosterMinHeight: 100,
                                 filePosterMaxHeight: 150,
                                 filePosterHeight: 150,
                             }
                         );
-                    } else {
+                    }
+
+
+                    else {
 
                         FilePond.create(element, {
                             storeAsFile: true,
@@ -89,6 +99,7 @@
                         });
 
                     }
+
                 }
 
             }
