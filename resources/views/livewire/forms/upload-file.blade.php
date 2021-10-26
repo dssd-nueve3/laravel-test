@@ -1,5 +1,5 @@
 <div>
-    <input id="{{$itemName}}" class="{{$itemName}}" type="file" name="{{$itemName}}[]" accept="{{$acceptedMimes}}" {{$multiple ? 'multiple' : ''}} data-max-files="{{ $maxUploadFiles > 1 ? $maxUploadFiles : 1}}"/>
+    <input data-collectionName="{{$collectionName}}" id="{{$itemName}}" class="{{$itemName}}" type="file" name="{{$itemName}}[]" accept="{{$acceptedMimes}}" {{$multiple ? 'multiple' : ''}} data-max-files="{{ $maxUploadFiles > 1 ? $maxUploadFiles : 1}}"/>
     <input type="text" name="{{$itemName}}_collectionName" value="{{$collectionName}}" hidden>
     @error($itemName)
     <small class="text-red-600">{{ $message }}</small>
@@ -34,73 +34,59 @@
 
             let url = window.location.href;
             let newUrl = "";
-
-
-
+            let filesUploaded = JSON.stringify({!! $uploadedFiles !!});
+            let files = '';
 
             // crear Poster únicamente cuando en edit;
-
-
-
-
-
             if(getImageDirectoryByFullURL(url) == 'edit') {
-                let files = {!! $uploadedFiles !!} ;
+                files = (filesUploaded == '') ? null : JSON.parse(filesUploaded);
+
             }
 
-
-            createFilePondElements(input);
+            createFilePondElements(input, files);
 
             function createFilePondElements(collectionElements, files) {
-                let filesNumber = !files ? 0 : Object.keys(files).length;
 
+                //files = (typeof {!! $uploadedFiles !!} !== 'undefined') ? {!! $uploadedFiles !!} : null;
+
+
+                let numberFiles = !files ? 0 : Object.keys(files).length;
                 let filesPoster = [];
-                let collections = [];
-                let collectionName;
 
-                for(let fileUploaded in files){
-                //let collectionName = fileUploaded;
+                console.log("numero de archivos:");
+                console.log(numberFiles);
 
-                 for( let fileI in files[collectionName]){
+                if(numberFiles > 0){
 
-                     //console.log(files[collectionName][fileI].fileSize);
-
-                     let file =  {options: {
-                             type: 'local',
-                             file: {
-                                 name: files[collectionName][fileI].fileName,
-                                 size: files[collectionName][fileI].fileSize,
-                                 type: files[collectionName][fileI].mimeType,
-                             },
-                             metadata: {
-                                 poster: files[collectionName][fileI].fileUrl,
-                             },
-
-                         }};
-
-                     filesPoster.push(file);
-
-                 }
+                    filesPoster = prepareCollectionFiles(files);
+                    console.log(filesPoster);
 
                 }
 
-                //console.log(collectionElements);
+                    for (let element of collectionElements) {
 
-                for (let element of collectionElements) {
+                    let fileCollectionName = element.dataset.collectionname;
+                    let collectionLength = 0;
 
-                    if (filesNumber >= 1) {
+                    if(Array.isArray(filesPoster[fileCollectionName])){
+
+                        collectionLength = filesPoster[fileCollectionName].length;
+
+                    }
+
+                    if(collectionLength > 0){
 
                         FilePond.create(element, {
                                 storeAsFile: true,
                                 allowMultiple: true,
-                                files:filesPoster[collectionName],
+                                files:filesPoster[fileCollectionName],
                                 filePosterMinHeight: 100,
                                 filePosterMaxHeight: 150,
                                 filePosterHeight: 150,
                             }
                         );
-                    }
 
+                    }
 
                     else {
 
@@ -109,17 +95,60 @@
                             allowMultiple: true,
                         });
 
+                    
+                    }
+
                     }
 
                 }
-
-            }
+                
 
             function getImageDirectoryByFullURL(url){
                 url = url.split('/');
                 url = url.pop();
                 return url;
             }
+
+            function prepareCollectionFiles(files){
+
+                let preparedFiles = [];
+
+                for( let collectionFiles in files){
+
+                for( let collectionFile in files[collectionFiles]){
+
+                    console.log(files[collectionFiles][collectionFile]);
+                    console.log(files[collectionFiles][collectionFile].original_url);
+
+                    let file =  {options: {
+                        type: 'local',
+                        file: {
+                            name: files[collectionFiles][collectionFile].name,
+                            size: files[collectionFiles][collectionFile].size,
+                            type: '.' + files[collectionFiles][collectionFile].extension,
+                        },
+                        metadata: {
+                            poster: files[collectionFiles][collectionFile].original_url,
+                        },
+
+                    }};
+
+                if(!Array.isArray(preparedFiles[collectionFiles])){
+
+                    console.log("no es arreglo");
+                    preparedFiles[collectionFiles] = [];
+                }
+
+                preparedFiles[collectionFiles].push(file);
+
+                }
+
+                }
+
+                return preparedFiles;
+
+            }
+
         </script>
     @endonce
 @endpush
