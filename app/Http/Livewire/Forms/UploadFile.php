@@ -13,12 +13,19 @@ class UploadFile extends Component
 
     use WithFileUploads;
 
-    public $model;
+    // ATTRIBUTES VARS
+    public $fileName;
+    public $fileSize;
     public $itemName;
     public $item;
     public $fileUrl;
-    public $fileName;
-    public $fileSize;
+    // STYLES VARS
+    public $bgDropArea;
+
+    // MODELS
+    public $model;
+
+
     public $mimeType;
     public $collectionName;
     public $acceptedFiles;
@@ -29,7 +36,7 @@ class UploadFile extends Component
 
     //public $file;
 
-    public function mount($model, $itemName, $collectionName, $acceptedFiles, $multiple, $maxUploadFiles)
+    public function mount($model, $itemName, $collectionName, $acceptedFiles, $multiple, $maxUploadFiles,$bgDropArea)
     {
 
         $this->itemName = $itemName;
@@ -37,7 +44,8 @@ class UploadFile extends Component
         $this->acceptedFiles = $acceptedFiles;
         $this->multiple = $multiple;
         $this->maxUploadFiles = $this->multiple ? $maxUploadFiles : 1;
-        $this->defineMimeTypes();
+        $this->bgDropArea = $bgDropArea;
+        $this->acceptedMimes = $this->acceptedFiles;
 
         if (gettype($model) === 'object') {
             $mediaCollections = $model->getRegisteredMediaCollections();
@@ -45,7 +53,7 @@ class UploadFile extends Component
 
                 if ($model->getMedia($media->name)) {
                     $files = $model->getMedia($media->name);
-                    $this->uploadedFiles [$media->name]= $files;
+                    $this->uploadedFiles [$media->name] = $files;
                 }
             }
             $this->uploadedFiles = json_encode($this->uploadedFiles);
@@ -58,31 +66,12 @@ class UploadFile extends Component
 
     }
 
-    public function defineMimeTypes()
+
+
+
+
+    public function save()
     {
-
-        $acceptedFiles = explode(',', $this->acceptedFiles);
-
-        $mimes = [
-            '.jpeg' => 'image/jpeg',
-            '.jpg' => 'image/jpeg',
-            '.pdf' => 'application/pdf',
-            '.png' => 'image/png'
-
-        ];
-
-        foreach ($acceptedFiles as $acceptedFile) {
-
-            $this->acceptedMimes .= $mimes[$acceptedFile] . ",";
-
-        }
-
-        $this->acceptedMimes = substr($this->acceptedMimes, 0, -1);
-
-    }
-
-    public function save(){
-
 
         $this->validate([
             'file' => 'image|max:10240',

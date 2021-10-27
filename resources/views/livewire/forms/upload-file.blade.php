@@ -1,3 +1,14 @@
+{{--
+    UPLOAD COMPONENT BLADE
+    require vars
+    :itemName - use as id and name of the component.
+    :bgDropArea - use only value in first component
+
+
+
+    TODO:
+
+ --}}
 <div wire:ignore>
     <input wire:model="{{$model}}" data-collectionName="{{$collectionName}}" id="{{$itemName}}" class="{{$itemName}}" type="file" name="{{$itemName}}[]" accept="{{$acceptedMimes}}" {{$multiple ? 'multiple' : ''}} data-max-files="{{ $maxUploadFiles > 1 ? $maxUploadFiles : 1}}"/>
     <input type="text" name="{{$itemName}}_collectionName" value="{{$collectionName}}" hidden>
@@ -10,6 +21,12 @@
         <link rel="stylesheet" href="{{asset('/vendor/filepond/dist/filepond.css')}}">
         <link rel="stylesheet" href="{{asset('/vendor/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css')}}">
         <link rel="stylesheet" href="{{asset('/vendor/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css')}}">
+    <style>
+        /* the background color of the filepond drop area */
+        .filepond--panel-root {
+        background-color: {{$bgDropArea}};
+        }
+    </style>
     @endonce
 @endpush
 
@@ -37,7 +54,9 @@
             let filesUploaded = JSON.stringify({!! $uploadedFiles !!});
             let files = '';
 
-            // crear Poster únicamente cuando en edit;
+            // TODO: crear Poster únicamente cuando en edit;
+
+
             if(getImageDirectoryByFullURL(url) == 'edit') {
                 files = (filesUploaded == '') ? null : JSON.parse(filesUploaded);
 
@@ -95,13 +114,13 @@
                             allowMultiple: true,
                         });
 
-                    
+
                     }
 
                     }
 
                 }
-                
+
 
             function getImageDirectoryByFullURL(url){
                 url = url.split('/');

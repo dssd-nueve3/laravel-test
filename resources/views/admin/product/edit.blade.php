@@ -15,22 +15,57 @@
             {{--TEXAREA--}}
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="description-{{$product->id}}" :value="'Description'"/>
-                <livewire:forms.text-area :itemId="'description-'.$product->id" :itemName="'description'" :itemValue="$product->description"/>
+                <livewire:forms.text-area
+                    :itemId="'description-'.$product->id"
+                    :itemName="'description'"
+                    :itemValue="$product->description"/>
             </div>
-            {{--UPLOAD FILE--}}
+            {{-- UPLOAD FILE image --}}
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="image" :value="'Image'"/>
-                <livewire:forms.upload-file :itemName="'image'" :model="$product" :collectionName="'product_image'" :acceptedFiles="'.pdf,.png,.jpg,.jpeg'" :multiple="true" :maxUploadFiles="'3'"/>
+                <livewire:forms.upload-file
+                    :itemName="'image'"
+                    :model="$product"
+                    :collectionName="'product_image'"
+                    :acceptedFiles="'image/jpeg,image/jpeg,application/pdf,image/png'"
+                    :multiple="true"
+                    :maxUploadFiles="'3'"
+                    :bgDropArea="'rgba(0,0,0,0.6)'"/>
             </div>
+            {{-- UPLOAD FILE pdf --}}
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="image2" :value="'Image2'"/>
-                <livewire:forms.upload-file :itemName="'image2'" :model="$product" :collectionName="'product_gallery'" :acceptedFiles="'.pdf,.png,.jpg,.jpeg'" :multiple="true" :maxUploadFiles="'3'"/>
+                <livewire:forms.upload-file
+                    :itemName="'image2'"
+                    :model="$product"
+                    :collectionName="'product_gallery'"
+                    :acceptedFiles="'image/jpeg,image/jpeg,application/pdf,image/png'"
+                    :multiple="true"
+                    :maxUploadFiles="'3'"
+                    :bgDropArea="'red'"
+                />
+
             </div>
             {{--INPUT--}}
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="price" :value="'Price'"/>
-                <livewire:forms.input-form id="price" name="price" :itemName="'price'" :itemValue="$product->price" :itemType="'number'" required autocomplete="current-password" autofocus :bladeAttributes="[
-                    'class' => 'block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm my-2',
+                <livewire:forms.input-form id="price"
+                                           name="price"
+                                           :itemName="'price'"
+                                           :itemValue="$product->price"
+                                           :itemType="'number'"
+                                           required autocomplete="current-password"
+                                           autofocus
+                                           :bladeAttributes="[
+                    'class' => 'block w-full
+                    border-gray-300
+                    focus:border-indigo-300
+                    focus:ring
+                    focus:ring-indigo-200
+                    focus:ring-opacity-50
+                    rounded-md
+                    shadow-sm
+                    my-2',
                     'min' => '0',
                     'step' => '0.01'
                     ]" />
