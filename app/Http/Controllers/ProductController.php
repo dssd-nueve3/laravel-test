@@ -60,7 +60,7 @@ class ProductController extends Controller
 
         //$product->addMedia($request->image)->toMediaCollection($request->collectionName);
 
-        if($request->image){
+        /*if($request->image){
 
             foreach($request->image as $image){
 
@@ -80,7 +80,7 @@ class ProductController extends Controller
 
 
         }
-    }
+    }*/
 
 
         //$this->iterateOverImages($product, $request->files);
@@ -88,7 +88,7 @@ class ProductController extends Controller
         //$model->$propertyName = $file;
         //$model->addMedia($file)->toMediaCollection('product_image');
 
-        $product->addAllMediaFromRequest()->toMediaCollection('product_image');
+        //$product->addAllMediaFromRequest()->toMediaCollection('product_image');
 
         $product->save();
 

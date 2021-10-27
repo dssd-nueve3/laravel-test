@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="max-w-6xl mx-auto shadow p-3 mt-4 bg-white rounded">
         <livewire:forms.header :action="'Create'" :model="'Product'" :element_type="'h6'"/>
-        <form enctype="multipart/form-data" action="{{route('product.store')}}" method="POST">
+        <form wire:submit.prevent="save" enctype="multipart/form-data" action="{{route('product.store')}}" method="POST">
             @csrf
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="name" :value="'Name'"/>
@@ -20,7 +20,8 @@
                                             :collectionName="'product_image'"
                                             :acceptedFiles="'.pdf,.png,.jpg,.jpeg'"
                                             :multiple="false"
-                                            :maxUploadFiles="'3'"/>
+                                            :maxUploadFiles="'3'"
+                                            wire:model="Product"/>
             </div>
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="image2" :value="'Image2'"/>
@@ -30,7 +31,8 @@
                                             :collectionName="'product_gallery'"
                                             :acceptedFiles="'.pdf,.png,.jpg,.jpeg'"
                                             :multiple="true"
-                                            :maxUploadFiles="'3'"/>
+                                            :maxUploadFiles="'3'"
+                                            wire:model="Product"/>
             </div>
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="price" :value="'Price'"/>

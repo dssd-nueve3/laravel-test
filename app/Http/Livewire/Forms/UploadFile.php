@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Forms;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
+use App\Models\Product;
+
 
 class UploadFile extends Component
 {
@@ -25,9 +27,11 @@ class UploadFile extends Component
     public $maxUploadFiles;
     public $uploadedFiles;
 
+    //public $file;
 
     public function mount($model, $itemName, $collectionName, $acceptedFiles, $multiple, $maxUploadFiles)
     {
+
         $this->itemName = $itemName;
         $this->collectionName = $collectionName;
         $this->acceptedFiles = $acceptedFiles;
@@ -46,7 +50,9 @@ class UploadFile extends Component
             }
             $this->uploadedFiles = json_encode($this->uploadedFiles);
 
-        } else {
+        } else { // creating model
+
+            $this->model = new Product();
             $this->uploadedFiles = false;
         }
 
@@ -72,6 +78,17 @@ class UploadFile extends Component
         }
 
         $this->acceptedMimes = substr($this->acceptedMimes, 0, -1);
+
+    }
+
+    public function save(){
+
+
+        $this->validate([
+            'file' => 'image|max:10240',
+        ]);
+
+        $this->file->store('public');
 
     }
 
