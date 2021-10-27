@@ -66,10 +66,6 @@ class UploadFile extends Component
 
     }
 
-
-
-
-
     public function save()
     {
 
