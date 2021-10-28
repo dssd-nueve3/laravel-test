@@ -96,7 +96,6 @@
                     if(collectionLength > 0){
 
                         FilePond.create(element, {
-                                storeAsFile: true,
                                 allowMultiple: true,
                                 files:filesPoster[fileCollectionName],
                                 filePosterMinHeight: 100,
@@ -105,6 +104,15 @@
                             }
                         );
 
+                        console.log("llegue");
+
+                        document.addEventListener('FilePond:removefile', (e) => {
+
+                            console.log("element deleted");
+                            console.log(e.detail.file.filename);
+
+                        });
+
                     }
 
                     else {
@@ -112,6 +120,16 @@
                         FilePond.create(element, {
                             storeAsFile: true,
                             allowMultiple: true,
+                        });
+
+                        document.addEventListener('FilePond:removefile', (e) => {
+                            console.log("element deleted");
+                            console.log(e.detail.file.filename);
+                            });
+
+                        document.addEventListener('FilePond:addfile', (e) => {
+                            console.log("element added");
+                            console.log(e.detail.file.filename);
                         });
 
 
