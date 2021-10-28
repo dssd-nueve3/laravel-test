@@ -36,6 +36,9 @@ class UploadFile extends Component
     public $maxUploadFiles;
     public $uploadedFiles;
 
+    public $temporaryFile;
+    public $temporaryFolder;
+
     //public $file;
 
     protected $listeners = ['addfile' => 'addFile'];
@@ -84,7 +87,7 @@ class UploadFile extends Component
     }
 
 
-    public function store(Request $request, $idElement){
+    public function upload(Request $request, $idElement){
 
             if($request->hasFile($idElement)){
                 $files = $request->file($idElement);
@@ -93,17 +96,29 @@ class UploadFile extends Component
     
                     $fileName = $file->getClientOriginalName();
                     $folder = uniqid() . '-' . now()->timestamp; 
-                    $file->storeAs('files/' . $folder, $fileName);
-    
+                    $file->storeAs('files/tmp/' . $folder, $fileName);
+
+                    TemporaryFile::create([
+                        'folder' => $folder,
+                        'filename' => $fileName,
+                    ]);
+
                 }
-    
+
+                dd(TemporaryFile::all());
+
                 return $folder;
     
             }
             
             return 'no';
-
     
+    }
+
+    public function store($id){
+
+        
+
     }
 
 }
