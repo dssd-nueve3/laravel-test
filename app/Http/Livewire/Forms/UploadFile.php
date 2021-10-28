@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Forms;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Http\Request;
+
 
 use App\Models\Product;
 
@@ -36,6 +38,16 @@ class UploadFile extends Component
 
     //public $file;
 
+    protected $listeners = ['addfile' => 'addFile'];
+
+    public function addFile($file){
+
+        dd($file);
+        
+
+    }
+
+
     public function mount($model, $itemName, $collectionName, $acceptedFiles, $multiple, $maxUploadFiles,$bgDropArea)
     {
 
@@ -66,20 +78,32 @@ class UploadFile extends Component
 
     }
 
-    public function save()
-    {
-
-        $this->validate([
-            'file' => 'image|max:10240',
-        ]);
-
-        $this->file->store('public');
-
-    }
-
     public function render()
     {
         return view('livewire.forms.upload-file');
+    }
+
+
+    public function store(Request $request, $idElement){
+
+            if($request->hasFile($idElement)){
+                $files = $request->file($idElement);
+    
+                foreach($files as $file){
+    
+                    $fileName = $file->getClientOriginalName();
+                    $folder = uniqid() . '-' . now()->timestamp; 
+                    $file->storeAs('files/' . $folder, $fileName);
+    
+                }
+    
+                return $folder;
+    
+            }
+            
+            return 'no';
+
+    
     }
 
 }

@@ -28,6 +28,11 @@ Route::resource('product', \App\Http\Controllers\ProductController::class)->midd
 Route::resource('user', \App\Http\Controllers\UserController::class)->middleware(['auth:sanctum', 'verified']);
 Route::resource('brand', \App\Http\Controllers\BrandController::class)->middleware(['auth:sanctum', 'verified']);
 
+//Route::post('upload/{idElement}', [\App\Http\Controllers\UploadController::class, 'store'])->middleware(['auth:sanctum', 'verified']);
+
+Route::post('/upload/{idElement}', [\App\Http\Livewire\Forms\UploadFile::class, 'store']);
+
+
 //Route::post('/product/{id}', \App\Http\Controllers\ProductController::class)->name('product.destroy');
 //Route::resource('/product/', \App\Http\Controllers\ProductController::class);
 //Route::resource('/users',UserController::class)->middleware(['auth:sanctum', 'verified']);
