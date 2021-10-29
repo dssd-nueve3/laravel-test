@@ -56,6 +56,16 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->brand_id = $request->brand;
 
+        $temporaryFile = TemporaryFile::where('folder', $request->image2)->first();
+
+        if($temporaryFile){
+
+            $product->addMedia(storage_path('app/public/files/tmp/', $request->image2 . '/' . $temporaryFile->filename))->toMediaCollection('product_image');
+
+        }
+
+        Route::post('/store/{idElement}', [\App\Http\Livewire\Forms\UploadFile::class, 'upload']);
+
         //dd($request->image);
 
         //$product->addMedia($request->image)->toMediaCollection($request->collectionName);
