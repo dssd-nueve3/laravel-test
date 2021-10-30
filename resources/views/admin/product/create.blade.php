@@ -19,12 +19,11 @@
                     :model="'Product'"
                     :collectionName="'product_image'"
                     :acceptedFiles="'image/jpeg,image/jpeg,application/pdf,image/png'"
-                    :multiple="false"
+                    :multiple="true"
                     :maxUploadFiles="'3'"
                     wire:model="Product"
-                    :bgDropArea="'#FF0000'"
+                    :bgDropArea="'blue'"
                 />
-
             </div>
             <div class="form-item-container my-2 p-2">
                 <livewire:forms.label for="image2" :value="'Image2'"/>

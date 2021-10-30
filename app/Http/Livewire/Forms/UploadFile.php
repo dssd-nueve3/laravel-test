@@ -7,7 +7,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Http\Request;
 
 
-use App\Models\Product;
+use App\Models\TemporaryFile;
 
 
 class UploadFile extends Component
@@ -51,7 +51,7 @@ class UploadFile extends Component
     }
 
 
-    public function mount($model, $itemName, $collectionName, $acceptedFiles, $multiple, $maxUploadFiles,$bgDropArea)
+    public function mount($model, $itemName, $collectionName, $acceptedFiles, $multiple, $maxUploadFiles, $bgDropArea)
     {
 
         $this->itemName = $itemName;
@@ -61,6 +61,8 @@ class UploadFile extends Component
         $this->maxUploadFiles = $this->multiple ? $maxUploadFiles : 1;
         $this->bgDropArea = $bgDropArea;
         $this->acceptedMimes = $this->acceptedFiles;
+
+        $this->model = $model;
 
         if (gettype($model) === 'object') {
             $mediaCollections = $model->getRegisteredMediaCollections();
@@ -75,7 +77,7 @@ class UploadFile extends Component
 
         } else { // creating model
 
-            $this->model = new Product();
+            //$this->model = new Product();
             $this->uploadedFiles = false;
         }
 
@@ -105,20 +107,13 @@ class UploadFile extends Component
 
                 }
 
-                dd(TemporaryFile::all());
-
-                return $folder;
+                return TemporaryFile::where('folder', $folder)->first();
     
             }
             
-            return 'no';
+            return '';
     
     }
 
-    public function store($id){
-
-        
-
-    }
 
 }

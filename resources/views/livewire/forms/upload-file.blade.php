@@ -10,7 +10,7 @@
 
  --}}
 <div wire:ignore>
-    <input wire:model="{{$model}}" data-collectionName="{{$collectionName}}" id="{{$itemName}}" class="{{$itemName}}" type="file" name="{{$itemName}}[]" accept="{{$acceptedMimes}}" {{$multiple ? 'multiple' : ''}} data-max-files="{{ $maxUploadFiles > 1 ? $maxUploadFiles : 1}}"/>
+    <input wire:model="{{$model}}" data-folder={{$temporaryFolder}} data-collectionName="{{$collectionName}}" id="{{$itemName}}" class="{{$itemName}}" type="file" name="{{$itemName}}[]" accept="{{$acceptedMimes}}" {{$multiple ? 'multiple' : ''}} data-max-files="{{ $maxUploadFiles > 1 ? $maxUploadFiles : 1}}"/>
     <input type="text" name="{{$itemName}}_collectionName" value="{{$collectionName}}" hidden>
     @error($itemName)
     <small class="text-red-600">{{ $message }}</small>
@@ -116,17 +116,6 @@
                     }
 
                     else {
-
-                        /*FilePond.create(element, {
-                            //storeAsFile: true,
-                            server: {
-                                url: '/',
-                                headers: {
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                }
-                            },
-                            allowMultiple: true,
-                        });*/
 
                         FilePond.create(element);
                         FilePond.setOptions({

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Brand;
+use App\Models\TemporaryFile;
 use Illuminate\Http\Request;
+use App\Http\Livewire\Forms\UploadFile;
 
 class ProductController extends Controller
 {
@@ -41,7 +43,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        //  dd($request);
+        dd($request);
 
       /*$request->validate([
             'name' => 'required|unique:products|max:255|min:6',
@@ -56,26 +58,13 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->brand_id = $request->brand;
 
-        $temporaryFile = TemporaryFile::where('folder', $request->image2)->first();
-
-        if($temporaryFile){
-
-            $product->addMedia(storage_path('app/public/files/tmp/', $request->image2 . '/' . $temporaryFile->filename))->toMediaCollection('product_image');
-
-        }
-
-        Route::post('/store/{idElement}', [\App\Http\Livewire\Forms\UploadFile::class, 'upload']);
-
-        //dd($request->image);
-
-        //$product->addMedia($request->image)->toMediaCollection($request->collectionName);
-
-        /*if($request->image){
+        
+        if($request->image){
 
             foreach($request->image as $image){
 
-                $product->addMedia($image)->toMediaCollection($request->image_collectionName);
-                $product->image = $image;
+                $imageInfo = json_decode($image);
+                $product->addMedia(storage_path('app/files/tmp/' . $imageInfo->folder . '/' . $imageInfo->filename))->toMediaCollection($request->image_collectionName);
 
             }
 
@@ -83,24 +72,20 @@ class ProductController extends Controller
 
         if($request->image2){
 
-        foreach($request->image2 as $image2){
+            foreach($request->image2 as $image){
 
-            $product->addMedia($image2)->toMediaCollection($request->image2_collectionName);
-            $product->image2 = $image2;
+                $imageInfo = json_decode($image);
+                $product->addMedia(storage_path('app/files/tmp/' . $imageInfo->folder . '/' . $imageInfo->filename))->toMediaCollection($request->image2_collectionName);
 
+            }
 
         }
-    }*/
 
 
-        //$this->iterateOverImages($product, $request->files);
-
-        //$model->$propertyName = $file;
-        //$model->addMedia($file)->toMediaCollection('product_image');
-
-        //$product->addAllMediaFromRequest()->toMediaCollection('product_image');
 
         $product->save();
+
+
 
         return redirect()->route('product.index')->with('success', 'Product created successfully');
 
@@ -224,12 +209,6 @@ class ProductController extends Controller
 
     }
 
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('thumb')
-              ->width(368)
-              ->height(232)
-              ->sharpen(10);
-    }
+
 
 }
