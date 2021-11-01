@@ -43,7 +43,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        dd($request);
+        //dd($re);
 
       /*$request->validate([
             'name' => 'required|unique:products|max:255|min:6',
@@ -58,7 +58,8 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->brand_id = $request->brand;
 
-        
+        // TODO: save files returned via UploadFile method
+
         if($request->image){
 
             foreach($request->image as $image){
@@ -81,10 +82,7 @@ class ProductController extends Controller
 
         }
 
-
-
         $product->save();
-
 
 
         return redirect()->route('product.index')->with('success', 'Product created successfully');

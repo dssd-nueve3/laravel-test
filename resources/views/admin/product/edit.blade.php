@@ -30,6 +30,7 @@
                     :acceptedFiles="'image/jpeg,image/jpeg,application/pdf,image/png'"
                     :multiple="true"
                     :maxUploadFiles="'3'"
+                    wire:model="Product"
                     :bgDropArea="'rgba(0,0,0,0.6)'"/>
             </div>
             {{-- UPLOAD FILE pdf --}}
@@ -42,6 +43,7 @@
                     :acceptedFiles="'image/jpeg,image/jpeg,application/pdf,image/png'"
                     :multiple="true"
                     :maxUploadFiles="'3'"
+                    wire:model="Product"
                     :bgDropArea="'red'"
                 />
 
