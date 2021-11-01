@@ -4,18 +4,58 @@
     :itemName - use as id and name of the component.
     :bgDropArea - use only value in first component
 
-
-
-    TODO:
-
  --}}
-<div wire:ignore>
-    <input wire:model="{{$model}}" data-collectionName="{{$collectionName}}" id="{{$itemName}}" class="{{$itemName}}" type="file" name="{{$itemName}}[]" accept="{{$acceptedMimes}}" {{$multiple ? 'multiple' : ''}} data-max-files="{{ $maxUploadFiles > 1 ? $maxUploadFiles : 1}}"/>
+
+
+ <div     
+    
+    //TODO: Ignore Filepond plugin structure
+    wire:ignore
+    
+    //TODO: var needed to use Alpine
+    x-data= "{pond: null}"
+    
+    //TODO: instanciate Filepond Element, without overring previous instances 
+    x-init=" () => {
+                        FilePond.registerPlugin(FilePondPluginFileValidateType);
+                        FilePond.registerPlugin(FilePondPluginFileValidateSize);
+                        FilePond.registerPlugin(FilePondPluginImagePreview);
+                        FilePond.registerPlugin(FilePondPluginFilePoster);
+                        pond = FilePond.create($refs.input);
+                        pond.setOptions({
+                        server: {
+                            /*url: '/upload/{{$itemName}}',*/
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            /*url:'laravel-test.test',*/
+                            process:'/upload/{{$itemName}}',
+                            load: '/load/',
+                        },
+                        allowMultiple: true,
+                    });
+                    /*pond.files = [
+                                {
+                                    //source: '',
+                                    options: {
+                                        type: 'local',
+                                        metadata: {
+                                            
+                                        }
+                                    }
+                                }
+                            ];*/
+
+}"
+>
+    <input type="file" x-ref="input" data-idElement={{$itemName}} data-folder={{$temporaryFolder}} data-collectionName="{{$collectionName}}" id="{{$itemName}}" class="{{$itemName}}"  name="{{$itemName}}[]" accept="{{$acceptedMimes}}" {{$multiple ? 'multiple' : ''}} data-max-files="{{ $maxUploadFiles > 1 ? $maxUploadFiles : 1}}"/>
     <input type="text" name="{{$itemName}}_collectionName" value="{{$collectionName}}" hidden>
     @error($itemName)
     <small class="text-red-600">{{ $message }}</small>
     @enderror
 </div>
+
+
 @push('styles')
     @once
         <link rel="stylesheet" href="{{asset('/vendor/filepond/dist/filepond.css')}}">
@@ -32,6 +72,7 @@
 
 @push('scripts')
     @once
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
         <script src="{{asset('vendor/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js')}}">
         </script>
         <script src="{{asset('vendor/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js')}}"></script>
@@ -47,44 +88,57 @@
             FilePond.registerPlugin(FilePondPluginFilePoster);
 
             // COMPONENT VARS
-            let input = $("[id^={{$itemName}}]");
+            /*let input = $("[id^={{$itemName}}]");
 
             let url = window.location.href;
             let newUrl = "";
             let filesUploaded = JSON.stringify({!! $uploadedFiles !!});
-            let files = '';
+            let files = '';*/
 
             // TODO: crear Poster únicamente cuando en edit;
-
-
             if(getImageDirectoryByFullURL(url) == 'edit') {
                 files = (filesUploaded == '') ? null : JSON.parse(filesUploaded);
 
             }
 
-            createFilePondElements(input, files);
+            //createFilePondElements(input, files);
 
             function createFilePondElements(collectionElements, files) {
+
+                console.log("files: ");
+                console.log(files);
 
                 //files = (typeof {!! $uploadedFiles !!} !== 'undefined') ? {!! $uploadedFiles !!} : null;
 
 
-                let numberFiles = !files ? 0 : Object.keys(files).length;
+                let numberCollections = !files ? 0 : Object.keys(files).length;
                 let filesPoster = [];
+                let elements = [];
 
-                console.log("numero de archivos:");
-                console.log(numberFiles);
+                console.log("numero de collecciones:");
+                console.log(numberCollections);
 
-                if(numberFiles > 0){
+                if(numberCollections > 0){
 
                     filesPoster = prepareCollectionFiles(files);
+                    console.log("imagenes guardadas: ");
                     console.log(filesPoster);
 
                 }
 
+                FilePond.create(pond, {
+                                allowMultiple: true,
+                                files:filesPoster[fileCollectionName],
+                                filePosterMinHeight: 100,
+                                filePosterMaxHeight: 150,
+                                filePosterHeight: 150,
+                            }
+                        );
+
                     for (let element of collectionElements) {
 
                     let fileCollectionName = element.dataset.collectionname;
+                    let idElement = element.dataset.idelement;
                     let collectionLength = 0;
 
                     if(Array.isArray(filesPoster[fileCollectionName])){
@@ -95,7 +149,10 @@
 
                     if(collectionLength > 0){
 
-                        FilePond.create(element, {
+                        console.log("llegue aca");
+                        console.log(collectionLength);
+
+                        FilePond.create(pond, {
                                 allowMultiple: true,
                                 files:filesPoster[fileCollectionName],
                                 filePosterMinHeight: 100,
@@ -115,54 +172,9 @@
 
                     }
 
-                    else {
+                }*/
 
-                        /*FilePond.create(element, {
-                            //storeAsFile: true,
-                            server: {
-                                url: '/',
-                                headers: {
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                }
-                            },
-                            allowMultiple: true,
-                        });*/
-
-                        FilePond.create(element);
-                        FilePond.setOptions({
-                            server: {
-                                url: '/upload/' + element.id,
-                                headers: {
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                }
-                            },
-                            allowMultiple: true,
-                        });
-
-                        document.addEventListener('FilePond:removefile', (e) => {
-                            console.log("element deleted");
-                            console.log(e.detail.file.filename);
-                            });
-
-                        document.addEventListener('FilePond:addfile', (e) => {
-
-                            console.log(e.detail.file.source);
-
-
-                            /*console.log("element added");
-                            console.log(e.detail.file.source);
-                            console.log(e.detail.file.filename);
-                            console.log(e);
-                            //Livewire.emit('addfile', e.detail.file);
-                            */
-                        });
-
-
-                    }
-
-                    }
-
-                }
+            }
 
 
             function getImageDirectoryByFullURL(url){
@@ -179,8 +191,8 @@
 
                 for( let collectionFile in files[collectionFiles]){
 
-                    console.log(files[collectionFiles][collectionFile]);
-                    console.log(files[collectionFiles][collectionFile].original_url);
+                    //console.log(files[collectionFiles][collectionFile]);
+                    //console.log(files[collectionFiles][collectionFile].original_url);
 
                     let file =  {options: {
                         type: 'local',
@@ -197,7 +209,6 @@
 
                 if(!Array.isArray(preparedFiles[collectionFiles])){
 
-                    console.log("no es arreglo");
                     preparedFiles[collectionFiles] = [];
                 }
 
@@ -214,3 +225,4 @@
         </script>
     @endonce
 @endpush
+

@@ -7,6 +7,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Http\Request;
 
 
+use App\Models\TemporaryFile;
 use App\Models\Product;
 
 
@@ -41,8 +42,10 @@ class UploadFile extends Component
 
     //public $file;
 
+    //TODO: wire Filepond's Events
     protected $listeners = ['addfile' => 'addFile'];
 
+    //TODO: first Filepond Event
     public function addFile($file){
 
         dd($file);
@@ -51,7 +54,7 @@ class UploadFile extends Component
     }
 
 
-    public function mount($model, $itemName, $collectionName, $acceptedFiles, $multiple, $maxUploadFiles,$bgDropArea)
+    public function mount($model, $itemName, $collectionName, $acceptedFiles, $multiple, $maxUploadFiles, $bgDropArea)
     {
 
         $this->itemName = $itemName;
@@ -61,6 +64,8 @@ class UploadFile extends Component
         $this->maxUploadFiles = $this->multiple ? $maxUploadFiles : 1;
         $this->bgDropArea = $bgDropArea;
         $this->acceptedMimes = $this->acceptedFiles;
+
+        $this->model = $model;
 
         if (gettype($model) === 'object') {
             $mediaCollections = $model->getRegisteredMediaCollections();
@@ -75,7 +80,7 @@ class UploadFile extends Component
 
         } else { // creating model
 
-            $this->model = new Product();
+            //$this->model = new Product();
             $this->uploadedFiles = false;
         }
 
@@ -86,15 +91,20 @@ class UploadFile extends Component
         return view('livewire.forms.upload-file');
     }
 
+    //TODO: method use to upload temporary Filepond files, in order to manage request on Filepond Elements,
+    //TODO: after saving, file info is returned to Model Controller
 
     public function upload(Request $request, $idElement){
+        
 
             if($request->hasFile($idElement)){
+
                 $files = $request->file($idElement);
     
                 foreach($files as $file){
     
                     $fileName = $file->getClientOriginalName();
+
                     $folder = uniqid() . '-' . now()->timestamp; 
                     $file->storeAs('files/tmp/' . $folder, $fileName);
 
@@ -105,19 +115,35 @@ class UploadFile extends Component
 
                 }
 
-                dd(TemporaryFile::all());
-
-                return $folder;
+                return TemporaryFile::where('folder', $folder)->first();
     
             }
             
-            return 'no';
+            return '';
     
     }
 
-    public function store($id){
+    //TODO: method use to load and show files already uploaded, when an id model is passed, search for all its media file related
+    //TODO: and passed to render UploadFile element view.
 
+    public function load($idModel){
+
+        $files = [];
+        $fileObject = [];
+
+       $model = Product::find($idModel);
+       $mediaCollections = $model->getRegisteredMediaCollections();
+
+       foreach ($mediaCollections as $mediaCollection) {
+
+        if ($model->getMedia($mediaCollection->name)) {
+            $files = $model->getMedia($mediaCollection->name);
+            $files [$mediaCollection->name] = $files;
+            }
         
+        }
+
+    return $files;
 
     }
 

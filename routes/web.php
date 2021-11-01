@@ -30,8 +30,9 @@ Route::resource('brand', \App\Http\Controllers\BrandController::class)->middlewa
 
 //Route::post('upload/{idElement}', [\App\Http\Controllers\UploadController::class, 'store'])->middleware(['auth:sanctum', 'verified']);
 
+//TODO: FileUpload component CRUD routing
 Route::post('/upload/{idElement}', [\App\Http\Livewire\Forms\UploadFile::class, 'upload']);
-//Route::resource('/store/{model}', [\App\Http\Livewire\Forms\UploadFile::class, 'store']);
+Route::get('/load/{product}', [\App\Http\Livewire\Forms\UploadFile::class, 'load']);
 
 
 //Route::post('/product/{id}', \App\Http\Controllers\ProductController::class)->name('product.destroy');
