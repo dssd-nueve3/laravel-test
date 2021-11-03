@@ -54,7 +54,7 @@ class UploadFile extends Component
     }
 
 
-    public function mount($model, $itemName, $collectionName, $acceptedFiles, $multiple, $maxUploadFiles, $bgDropArea)
+    public function mount($itemName, $collectionName, $acceptedFiles, $multiple, $maxUploadFiles, $bgDropArea)
     {
 
         $this->itemName = $itemName;
@@ -65,9 +65,9 @@ class UploadFile extends Component
         $this->bgDropArea = $bgDropArea;
         $this->acceptedMimes = $this->acceptedFiles;
 
-        $this->model = $model;
+        //$this->model = $model;
 
-        if (gettype($model) === 'object') {
+        /*if (gettype($model) === 'object') {
             $mediaCollections = $model->getRegisteredMediaCollections();
             foreach ($mediaCollections as $media) {
 
@@ -82,7 +82,7 @@ class UploadFile extends Component
 
             //$this->model = new Product();
             $this->uploadedFiles = false;
-        }
+        }*/
 
     }
 
@@ -126,7 +126,9 @@ class UploadFile extends Component
     //TODO: method use to load and show files already uploaded, when an id model is passed, search for all its media file related
     //TODO: and passed to render UploadFile element view.
 
-    public function load($idModel){
+    public function load(){
+
+        dd('fui llamada');
 
         $files = [];
         $fileObject = [];

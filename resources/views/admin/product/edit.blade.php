@@ -25,7 +25,7 @@
                 <livewire:forms.label for="image" :value="'Image'"/>
                 <livewire:forms.upload-file
                     :itemName="'image'"
-                    :model="$product"
+                    {{-- :model="$product" --}}
                     :collectionName="'product_image'"
                     :acceptedFiles="'image/jpeg,image/jpeg,application/pdf,image/png'"
                     :multiple="true"
@@ -38,7 +38,7 @@
                 <livewire:forms.label for="image2" :value="'Image2'"/>
                 <livewire:forms.upload-file
                     :itemName="'image2'"
-                    :model="$product"
+                    {{-- :model="$product" --}}
                     :collectionName="'product_gallery'"
                     :acceptedFiles="'image/jpeg,image/jpeg,application/pdf,image/png'"
                     :multiple="true"

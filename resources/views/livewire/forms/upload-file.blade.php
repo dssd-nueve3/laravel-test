@@ -23,28 +23,31 @@
                         FilePond.registerPlugin(FilePondPluginFilePoster);
                         pond = FilePond.create($refs.input);
                         pond.setOptions({
+                        labelIdle: 'Arratre sus archivos aqui',
                         server: {
                             /*url: '/upload/{{$itemName}}',*/
                             headers: {
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                             },
                             /*url:'laravel-test.test',*/
-                            process:'/upload/{{$itemName}}',
-                            load: '/load/',
+                            process: '/upload/{{$itemName}}',
+                            load: {
+                                url:'/load/{wire:model}',
+                                options: {
+                                    type: 'local',
+                                    metadata: {
+                                        //poster: files[collectionFiles][collectionFile].original_url,
+                                    },
+            
+                                },
+                                    
+                            },
+                            revert: './revert',
+                            restore: './restore/',
+                            fetch: './fetch/'
                         },
                         allowMultiple: true,
                     });
-                    /*pond.files = [
-                                {
-                                    //source: '',
-                                    options: {
-                                        type: 'local',
-                                        metadata: {
-                                            
-                                        }
-                                    }
-                                }
-                            ];*/
 
 }"
 >
@@ -88,18 +91,18 @@
             FilePond.registerPlugin(FilePondPluginFilePoster);
 
             // COMPONENT VARS
-            /*let input = $("[id^={{$itemName}}]");
+            let input = $("[id^={{$itemName}}]");
 
             let url = window.location.href;
             let newUrl = "";
             let filesUploaded = JSON.stringify({!! $uploadedFiles !!});
-            let files = '';*/
+            let files = '';
 
             // TODO: crear Poster únicamente cuando en edit;
-            if(getImageDirectoryByFullURL(url) == 'edit') {
+            /*if(getImageDirectoryByFullURL(url) == 'edit') {
                 files = (filesUploaded == '') ? null : JSON.parse(filesUploaded);
 
-            }
+            }*/
 
             //createFilePondElements(input, files);
 
@@ -172,7 +175,7 @@
 
                     }
 
-                }*/
+                }
 
             }
 
