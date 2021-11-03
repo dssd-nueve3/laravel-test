@@ -26,7 +26,7 @@ class UploadFile extends Component
     public $bgDropArea;
 
     // MODELS
-    public $model;
+    public $product;
 
 
     public $mimeType;
@@ -54,7 +54,7 @@ class UploadFile extends Component
     }
 
 
-    public function mount($model, $itemName, $collectionName, $acceptedFiles, $multiple, $maxUploadFiles, $bgDropArea)
+    public function mount($itemName, $collectionName, $acceptedFiles, $multiple, $maxUploadFiles, $bgDropArea)
     {
 
         $this->itemName = $itemName;
@@ -65,9 +65,7 @@ class UploadFile extends Component
         $this->bgDropArea = $bgDropArea;
         $this->acceptedMimes = $this->acceptedFiles;
 
-        $this->model = $model;
-
-        if (gettype($model) === 'object') {
+        /*if (gettype($model) === 'object') {
             $mediaCollections = $model->getRegisteredMediaCollections();
             foreach ($mediaCollections as $media) {
 
@@ -82,7 +80,7 @@ class UploadFile extends Component
 
             //$this->model = new Product();
             $this->uploadedFiles = false;
-        }
+        }*/
 
     }
 
@@ -128,10 +126,15 @@ class UploadFile extends Component
 
     public function load($idModel){
 
+        //dd($this);
+
         $files = [];
         $fileObject = [];
 
        $model = Product::find($idModel);
+
+       dd($model);
+
        $mediaCollections = $model->getRegisteredMediaCollections();
 
        foreach ($mediaCollections as $mediaCollection) {

@@ -30,11 +30,11 @@
                             },
                             /*url:'laravel-test.test',*/
                             process:'/upload/{{$itemName}}',
-                            load: '/load/',
+                            load: '/load/{wire:model}',
                         },
                         allowMultiple: true,
                     });
-                    /*pond.files = [
+                    pond.files = [
                                 {
                                     //source: '',
                                     options: {
@@ -44,7 +44,7 @@
                                         }
                                     }
                                 }
-                            ];*/
+                            ];
 
 }"
 >
